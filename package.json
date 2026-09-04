@@ -1,0 +1,28 @@
+{
+  "name": "pocket-potter",
+  "version": "1.0.0",
+  "description": "Collectible card trading app set in the Harry Potter universe",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Federico Cigada <federico.cigada1@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^6.13.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.3",
+    "globals": "^17.4.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.8.2",
+    "swagger-autogen": "^2.23.7"
+  }
+}

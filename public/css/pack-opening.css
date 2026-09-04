@@ -1,0 +1,14 @@
+.card-container {
+  max-width: 300px;
+  margin: 0 auto;
+}
+.hero-card {
+  transition: transform 0.3s;
+}
+.hero-card:hover {
+  transform: translateY(-5px);
+}
+.hero-card img {
+  height: 300px;
+  object-fit: cover;
+}

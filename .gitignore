@@ -1,0 +1,7 @@
+node_modules/
+client/node_modules/
+.env
+client/.env.development
+client/.env.production
+client/dist/
+.DS_Store

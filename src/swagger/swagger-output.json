@@ -1,0 +1,2937 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PocketPotter API",
+    "description": "Swagger for the PocketPotter project",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3100",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "User",
+      "description": "Operations related to user management"
+    },
+    {
+      "name": "Album",
+      "description": "Operations related to the sticker album management"
+    },
+    {
+      "name": "Shop",
+      "description": "Operations related to purchases and sales"
+    },
+    {
+      "name": "Characters",
+      "description": "Operations related to Harry Potter characters"
+    },
+    {
+      "name": "Exchange",
+      "description": "Operations related to sticker exchanges between users"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Register a new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User registration data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "username",
+                    "email",
+                    "password"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "mario.rossi"
+                        }
+                      }
+                    },
+                    "email": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "mario@example.com"
+                        }
+                      }
+                    },
+                    "password": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "password123"
+                        }
+                      }
+                    },
+                    "housePreference": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Gryffindor"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User registered successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User registered successfully"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "507f1f77bcf86cd799439011"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "mario.rossi"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "mario@example.com"
+                    },
+                    "housePreference": {
+                      "type": "string",
+                      "example": "Gryffindor"
+                    },
+                    "credits": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "album": {
+                      "type": "array",
+                      "example": [],
+                      "items": {}
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "All fields are required"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Login and receive a JWT token",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Login credentials",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "email",
+                    "password"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "mario@example.com"
+                        }
+                      }
+                    },
+                    "password": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "password123"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Login successful"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "507f1f77bcf86cd799439011"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "mario.rossi"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "mario@example.com"
+                    }
+                  }
+                },
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid credentials",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Invalid credentials"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/account/update": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "Update authenticated user account details",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Fields to update (all optional)",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "new_username"
+                        }
+                      }
+                    },
+                    "email": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "new@email.com"
+                        }
+                      }
+                    },
+                    "housePreference": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Slytherin"
+                        }
+                      }
+                    },
+                    "password": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "newPassword123"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account updated successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Account updated successfully"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/account/delete": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "description": "Delete the authenticated user account",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account deleted successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Account deleted successfully"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/account": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Get authenticated user account details including credits and collection statistics",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account details retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Account details retrieved successfully"
+                },
+                "account": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "example": "mario.rossi"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "mario@example.com"
+                    },
+                    "housePreference": {
+                      "type": "string",
+                      "example": "Gryffindor"
+                    },
+                    "credits": {
+                      "type": "number",
+                      "example": 100
+                    },
+                    "statistics": {
+                      "type": "object",
+                      "properties": {
+                        "totalCards": {
+                          "type": "number",
+                          "example": 15
+                        },
+                        "uniqueCards": {
+                          "type": "number",
+                          "example": 10
+                        },
+                        "duplicateCards": {
+                          "type": "number",
+                          "example": 5
+                        },
+                        "completionPercentage": {
+                          "type": "number",
+                          "example": 40
+                        },
+                        "completedExchanges": {
+                          "type": "number",
+                          "example": 7
+                        },
+                        "houseDistribution": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "house": {
+                                "type": "string",
+                                "example": "Slytherin"
+                              },
+                              "count": {
+                                "type": "number",
+                                "example": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/album": {
+      "get": {
+        "tags": [
+          "Album"
+        ],
+        "description": "Get the full album with owned and missing cards",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Album retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Album retrieved successfully"
+                },
+                "album": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hpId": {
+                        "type": "string",
+                        "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+                      },
+                      "index": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Harry Potter"
+                      },
+                      "house": {
+                        "type": "string",
+                        "example": "Gryffindor"
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 2
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/album/duplicates": {
+      "get": {
+        "tags": [
+          "Album"
+        ],
+        "description": "Get duplicate cards available for trading or selling",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Duplicate cards retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Duplicate cards retrieved successfully"
+                },
+                "duplicates": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hpId": {
+                        "type": "string",
+                        "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Harry Potter"
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "url"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 3
+                      },
+                      "availableForTrade": {
+                        "type": "number",
+                        "example": 2
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/purchase-credits": {
+      "post": {
+        "tags": [
+          "Shop"
+        ],
+        "description": "Purchase virtual credits",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Number of credits to purchase",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "credits"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "credits": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "number"
+                        },
+                        "example": {
+                          "type": "number",
+                          "example": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credits purchased successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Credits purchased"
+                },
+                "credits": {
+                  "type": "number",
+                  "example": 5
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "credits (positive number) is required"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/purchase-pack": {
+      "post": {
+        "tags": [
+          "Shop"
+        ],
+        "description": "Purchase a standard pack (5 random cards, costs 1 credit)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pack purchased successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Pack purchased successfully"
+                },
+                "cards": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hpId": {
+                        "type": "string",
+                        "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Harry Potter"
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "url"
+                      }
+                    }
+                  }
+                },
+                "remainingCredits": {
+                  "type": "number",
+                  "example": 4
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Insufficient credits",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Insufficient credits"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/characters": {
+      "get": {
+        "tags": [
+          "Characters"
+        ],
+        "description": "Get all characters in the collection",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Characters retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "characters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hpId": {
+                        "type": "string",
+                        "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+                      },
+                      "index": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Harry Potter"
+                      },
+                      "house": {
+                        "type": "string",
+                        "example": "Gryffindor"
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "url"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Failed to retrieve characters"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/characters/detail/{id}": {
+      "get": {
+        "tags": [
+          "Characters"
+        ],
+        "description": "Get basic info for a single character",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "HP character ID (UUID)",
+            "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Character retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hpId": {
+                  "type": "string",
+                  "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+                },
+                "index": {
+                  "type": "number",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Harry Potter"
+                },
+                "house": {
+                  "type": "string",
+                  "example": "Gryffindor"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "url"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Missing ID",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Character ID is required"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Character not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Character not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Failed to retrieve character"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/characters/details/{id}": {
+      "get": {
+        "tags": [
+          "Characters"
+        ],
+        "description": "Get full character details (house, wand, patronus, ancestry)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "HP character ID (UUID)",
+            "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Character details retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Harry Potter"
+                },
+                "house": {
+                  "type": "string",
+                  "example": "Gryffindor"
+                },
+                "species": {
+                  "type": "string",
+                  "example": "human"
+                },
+                "ancestry": {
+                  "type": "string",
+                  "example": "half-blood"
+                },
+                "patronus": {
+                  "type": "string",
+                  "example": "stag"
+                },
+                "wand": {
+                  "type": "object",
+                  "properties": {
+                    "wood": {
+                      "type": "string",
+                      "example": "holly"
+                    },
+                    "core": {
+                      "type": "string",
+                      "example": "phoenix feather"
+                    },
+                    "length": {
+                      "type": "number",
+                      "example": 11
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Missing ID",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Character ID is required"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Character not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Character not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Failed to retrieve character details"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/exchange/propose": {
+      "post": {
+        "tags": [
+          "Exchange"
+        ],
+        "description": "Propose a 1-for-1 card trade (cards identified by hpId; name, image and house are resolved server-side)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "IDs of the offered and requested cards",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "offeredHpId",
+                    "requestedHpId"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "offeredHpId": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+                        }
+                      }
+                    },
+                    "requestedHpId": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "a1b2c3d4-0000-1111-2222-333344445555"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade proposed successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Exchange proposed"
+                },
+                "exchange": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "507f1f77bcf86cd799439011"
+                    },
+                    "offeredHpId": {
+                      "type": "string",
+                      "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+                    },
+                    "offeredCardName": {
+                      "type": "string",
+                      "example": "Harry Potter"
+                    },
+                    "offeredImage": {
+                      "type": "string",
+                      "example": "url"
+                    },
+                    "offeredHouse": {
+                      "type": "string",
+                      "example": "Gryffindor"
+                    },
+                    "requestedHpId": {
+                      "type": "string",
+                      "example": "a1b2c3d4-0000-1111-2222-333344445555"
+                    },
+                    "requestedCardName": {
+                      "type": "string",
+                      "example": "Hermione Granger"
+                    },
+                    "requestedImage": {
+                      "type": "string",
+                      "example": "url"
+                    },
+                    "requestedHouse": {
+                      "type": "string",
+                      "example": "Gryffindor"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "pending"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Not enough copies of the offered card"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/exchange/accept": {
+      "post": {
+        "tags": [
+          "Exchange"
+        ],
+        "description": "Accept a trade proposal (uses atomic operation for concurrency handling)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "ID of the trade to accept",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "exchangeId"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "exchangeId": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "507f1f77bcf86cd799439011"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade completed successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Trade completed successfully"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Card no longer available",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Proposer no longer has the offered duplicate card"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Trade already accepted by another user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Trade not found or already accepted by another user"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/exchanges": {
+      "get": {
+        "tags": [
+          "Exchange"
+        ],
+        "description": "Get available trades (excluding the user\\'s own), optionally filtered by house and/or card name",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "house",
+            "in": "query",
+            "description": "Optional. Filter by house, matching either the offered or requested card (e.g. Gryffindor)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Optional. Case-insensitive partial match on either card name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available trades retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Available trades retrieved successfully"
+                },
+                "exchanges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "507f1f77bcf86cd799439011"
+                      },
+                      "offeredCardName": {
+                        "type": "string",
+                        "example": "Harry Potter"
+                      },
+                      "requestedCardName": {
+                        "type": "string",
+                        "example": "Hermione Granger"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "pending"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/exchange/user": {
+      "get": {
+        "tags": [
+          "Exchange"
+        ],
+        "description": "Get trade proposals created by the authenticated user",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User trades retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User trades retrieved successfully"
+                },
+                "exchanges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "507f1f77bcf86cd799439011"
+                      },
+                      "offeredCardName": {
+                        "type": "string",
+                        "example": "Harry Potter"
+                      },
+                      "requestedCardName": {
+                        "type": "string",
+                        "example": "Hermione Granger"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "pending"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/exchange/completed": {
+      "get": {
+        "tags": [
+          "Exchange"
+        ],
+        "description": "Get completed trades for the authenticated user (both proposed and accepted)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed trades retrieved successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Completed trades retrieved successfully"
+                },
+                "exchanges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "507f1f77bcf86cd799439011"
+                      },
+                      "offeredCardName": {
+                        "type": "string",
+                        "example": "Harry Potter"
+                      },
+                      "offeredImage": {
+                        "type": "string",
+                        "example": "url"
+                      },
+                      "requestedCardName": {
+                        "type": "string",
+                        "example": "Hermione Granger"
+                      },
+                      "acceptorName": {
+                        "type": "string",
+                        "example": "luigi.verdi"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "completed"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/exchange/{exchangeId}": {
+      "delete": {
+        "tags": [
+          "Exchange"
+        ],
+        "description": "Cancel a pending trade proposal (only the proposer can cancel)",
+        "parameters": [
+          {
+            "name": "exchangeId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Trade proposal ID",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade cancelled successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Trade cancelled successfully"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "403": {
+            "description": "Not authorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Only the proposer can cancel the trade"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Trade not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Trade not found or already completed"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sell-sticker": {
+      "post": {
+        "tags": [
+          "Shop"
+        ],
+        "description": "Sell a duplicate card for 1 credit (cannot sell the last copy)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "ID of the card to sell",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "hpId"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "hpId": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Card sold successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Card sold successfully"
+                },
+                "remainingCredits": {
+                  "type": "number",
+                  "example": 5
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Cannot sell last copy",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Cannot sell the last copy of a card"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "User or card not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User or card not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/purchase-maxi-pack": {
+      "post": {
+        "tags": [
+          "Shop"
+        ],
+        "description": "Purchase a maxi pack (9 random cards, costs 3 credits)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token: Bearer <token>",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Maxi pack purchased successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Maxi pack purchased successfully"
+                },
+                "cards": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hpId": {
+                        "type": "string",
+                        "example": "uuid"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Harry Potter"
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": "url"
+                      }
+                    }
+                  }
+                },
+                "remainingCredits": {
+                  "type": "number",
+                  "example": 3
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Insufficient credits",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Insufficient credits"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Missing token"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegisterRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "mario.rossi"
+        },
+        "email": {
+          "type": "string",
+          "example": "mario@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "password123"
+        },
+        "housePreference": {
+          "type": "string",
+          "example": "Gryffindor"
+        }
+      }
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "mario@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "password123"
+        }
+      }
+    },
+    "UpdateAccountRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "new_username"
+        },
+        "email": {
+          "type": "string",
+          "example": "new@email.com"
+        },
+        "housePreference": {
+          "type": "string",
+          "example": "Slytherin"
+        },
+        "password": {
+          "type": "string",
+          "example": "newPassword123"
+        }
+      }
+    },
+    "AccountStatistics": {
+      "type": "object",
+      "properties": {
+        "totalCards": {
+          "type": "number",
+          "example": 15
+        },
+        "uniqueCards": {
+          "type": "number",
+          "example": 10
+        },
+        "duplicateCards": {
+          "type": "number",
+          "example": 5
+        },
+        "completionPercentage": {
+          "type": "number",
+          "example": 40
+        },
+        "completedExchanges": {
+          "type": "number",
+          "example": 7
+        },
+        "houseDistribution": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "house": {
+                "type": "string",
+                "example": "Slytherin"
+              },
+              "count": {
+                "type": "number",
+                "example": 3
+              }
+            }
+          }
+        }
+      }
+    },
+    "DuplicateCard": {
+      "type": "object",
+      "properties": {
+        "hpId": {
+          "type": "string",
+          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+        },
+        "name": {
+          "type": "string",
+          "example": "Harry Potter"
+        },
+        "image": {
+          "type": "string",
+          "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+        },
+        "quantity": {
+          "type": "number",
+          "example": 3
+        },
+        "availableForTrade": {
+          "type": "number",
+          "example": 2
+        }
+      }
+    },
+    "PurchaseCreditsRequest": {
+      "type": "object",
+      "properties": {
+        "credits": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "ExchangeRequest": {
+      "type": "object",
+      "properties": {
+        "offeredHpId": {
+          "type": "string",
+          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+        },
+        "offeredCardName": {
+          "type": "string",
+          "example": "Harry Potter"
+        },
+        "offeredImage": {
+          "type": "string",
+          "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+        },
+        "requestedHpId": {
+          "type": "string",
+          "example": "some-other-uuid"
+        },
+        "requestedCardName": {
+          "type": "string",
+          "example": "Hermione Granger"
+        }
+      }
+    },
+    "ExchangeResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439011"
+        },
+        "offeredHpId": {
+          "type": "string",
+          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+        },
+        "offeredCardName": {
+          "type": "string",
+          "example": "Harry Potter"
+        },
+        "offeredImage": {
+          "type": "string",
+          "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+        },
+        "requestedHpId": {
+          "type": "string",
+          "example": "some-other-uuid"
+        },
+        "requestedCardName": {
+          "type": "string",
+          "example": "Hermione Granger"
+        },
+        "status": {
+          "type": "string",
+          "example": "pending"
+        }
+      }
+    },
+    "AcceptExchangeRequest": {
+      "type": "object",
+      "properties": {
+        "exchangeId": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439011"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439011"
+        },
+        "username": {
+          "type": "string",
+          "example": "mario.rossi"
+        },
+        "email": {
+          "type": "string",
+          "example": "mario@example.com"
+        },
+        "housePreference": {
+          "type": "string",
+          "example": "Gryffindor"
+        },
+        "credits": {
+          "type": "number",
+          "example": 0
+        },
+        "album": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hpId": {
+                "type": "string",
+                "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+              },
+              "name": {
+                "type": "string",
+                "example": "Harry Potter"
+              },
+              "house": {
+                "type": "string",
+                "example": "Gryffindor"
+              },
+              "image": {
+                "type": "string",
+                "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+              },
+              "quantity": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "Character": {
+      "type": "object",
+      "properties": {
+        "hpId": {
+          "type": "string",
+          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+        },
+        "index": {
+          "type": "number",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "Harry Potter"
+        },
+        "house": {
+          "type": "string",
+          "example": "Gryffindor"
+        },
+        "image": {
+          "type": "string",
+          "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+        }
+      }
+    },
+    "CharacterDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Harry Potter"
+        },
+        "house": {
+          "type": "string",
+          "example": "Gryffindor"
+        },
+        "species": {
+          "type": "string",
+          "example": "human"
+        },
+        "ancestry": {
+          "type": "string",
+          "example": "half-blood"
+        },
+        "patronus": {
+          "type": "string",
+          "example": "stag"
+        },
+        "wand": {
+          "type": "object",
+          "properties": {
+            "wood": {
+              "type": "string",
+              "example": "holly"
+            },
+            "core": {
+              "type": "string",
+              "example": "phoenix feather"
+            },
+            "length": {
+              "type": "number",
+              "example": 11
+            }
+          }
+        }
+      }
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "hpId": {
+          "type": "string",
+          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+        },
+        "name": {
+          "type": "string",
+          "example": "Harry Potter"
+        },
+        "image": {
+          "type": "string",
+          "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+        }
+      }
+    },
+    "SellStickerRequest": {
+      "type": "object",
+      "properties": {
+        "hpId": {
+          "type": "string",
+          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+        }
+      }
+    },
+    "SellStickerResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Card sold successfully"
+        },
+        "remainingCredits": {
+          "type": "number",
+          "example": 5
+        }
+      }
+    }
+  }
+}

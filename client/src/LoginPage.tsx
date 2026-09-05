@@ -54,7 +54,7 @@ function LoginPage() {
           />
           {error && <p className="text-sm text-destructive">{error}</p>}
           <Button className="w-full" onClick={handleLogin}>
-            Login
+            Sign in
           </Button>
         </CardContent>
       </Card>

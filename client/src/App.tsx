@@ -4,8 +4,8 @@ import Layout from '@/components/Layout';
 import DashboardPage from '@/DashboardPage';
 import AlbumPage from '@/AlbumPage';
 import ShopPage from '@/ShopPage';
-import ScambiPage from '@/ScambiPage';
-import GuidaPage from '@/GuidaPage';
+import TradesPage from '@/TradesPage';
+import GuidePage from '@/GuidePage';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/album" element={<AlbumPage />} />
             <Route path="/shop" element={<ShopPage />} />
-            <Route path="/scambi" element={<ScambiPage />} />
-            <Route path="/guida" element={<GuidaPage />} />
+            <Route path="/trades" element={<TradesPage />} />
+            <Route path="/guide" element={<GuidePage />} />
           </Route>
         </Route>
       </Routes>

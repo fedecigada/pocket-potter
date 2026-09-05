@@ -34,7 +34,7 @@ function displayWand(wand: CharacterDetails['wand'] | undefined) {
   return parts.length > 0 ? parts.join(' / ') : 'unknown';
 }
 
-export default function GuidaPage() {
+export default function GuidePage() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');

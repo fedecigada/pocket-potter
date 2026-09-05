@@ -17,10 +17,10 @@ export default function Navbar() {
         <div className="flex items-center gap-6">
           <Link to="/album">Album</Link>
           <Link to="/shop">Shop</Link>
-          <Link to="/scambi">Scambi</Link>
-          <Link to="/guida">Guida</Link>
+          <Link to="/trades">Trades</Link>
+          <Link to="/guide">Guide</Link>
           <Button variant="outline" onClick={handleLogout}>
-            Esci
+            Sign out
           </Button>
         </div>
       </div>

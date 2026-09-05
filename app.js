@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const swaggerUi = require('swagger-ui-express');
@@ -18,6 +19,7 @@ const dbName = process.env.DB_NAME;
 const app = express();
 const PORT = process.env.PORT || 3100;
 
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

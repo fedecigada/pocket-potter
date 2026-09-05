@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./src/swagger/swagger-output.json');
 const authMiddleware = require('./src/middleware/auth');
@@ -21,7 +20,6 @@ const PORT = process.env.PORT || 3100;
 
 app.use(cors({ origin: process.env.FRONTEND_URL }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // User

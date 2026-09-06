@@ -5,29 +5,30 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useNavigate, Link } from 'react-router-dom';
 import { baseUrl } from '@/lib/api';
 
-function LoginPage() {
+function RegisterPage() {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [housePreference, setHousePreference] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  async function handleLogin() {
+  async function handleRegister() {
     setError('');
     try {
-      const response = await fetch(`${baseUrl}/api/login`, {
+      const response = await fetch(`${baseUrl}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, email, password, housePreference }),
       });
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || 'Login failed');
+        setError(data.error || data.message || 'Registration failed');
         return;
       }
 
-      localStorage.setItem('token', data.token);
-      navigate('/');
+      navigate('/login');
     } catch {
       setError('Network error');
     }
@@ -41,11 +42,28 @@ function LoginPage() {
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <Input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <select
+            className="border-input h-9 rounded-md border bg-transparent px-3 text-sm"
+            value={housePreference}
+            onChange={(e) => setHousePreference(e.target.value)}
+          >
+            <option value="">Choose your house (optional)</option>
+            <option value="Gryffindor">Gryffindor</option>
+            <option value="Hufflepuff">Hufflepuff</option>
+            <option value="Ravenclaw">Ravenclaw</option>
+            <option value="Slytherin">Slytherin</option>
+          </select>
           <Input
             type="password"
             placeholder="Password"
@@ -53,13 +71,13 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
           {error && <p className="text-sm text-destructive">{error}</p>}
-          <Button className="w-full" onClick={handleLogin}>
-            Sign in
+          <Button className="w-full" onClick={handleRegister}>
+            Sign up
           </Button>
           <p className="text-center text-sm text-muted-foreground">
-            Don't have an account?{' '}
-            <Link to="/register" className="underline">
-              Sign up
+            Already have an account?{' '}
+            <Link to="/login" className="underline">
+              Sign in
             </Link>
           </p>
         </CardContent>
@@ -68,4 +86,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

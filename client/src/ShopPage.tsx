@@ -74,14 +74,14 @@ export default function ShopPage() {
       </div>
       <div className="mt-6 flex gap-4">
         <Button onClick={() => buyPack('/api/purchase-pack')} disabled={buying}>
-          Buy pack (5 cards — 1 credit)
+          Buy pack (5 cards - 1 credit)
         </Button>
         <Button
           variant="secondary"
           onClick={() => buyPack('/api/purchase-maxi-pack')}
           disabled={buying}
         >
-          Buy maxi pack (9 cards — 3 credits)
+          Buy maxi pack (9 cards - 3 credits)
         </Button>
       </div>
       {error && <p className="mt-4 text-red-600">{error}</p>}

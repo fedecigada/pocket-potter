@@ -236,6 +236,7 @@ async function getAccount(req, res, uri, dbName) {
         totalCards,
         uniqueCards,
         duplicateCards,
+        totalCollectionSize,
         completionPercentage:
           totalCollectionSize > 0
             ? Math.round((uniqueCards / totalCollectionSize) * 100)

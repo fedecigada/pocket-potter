@@ -66,7 +66,7 @@ export default function GuidePage() {
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-2xl space-y-3 px-8">
+      <div className="space-y-3">
         {Array.from({ length: 6 }).map((_, i) => (
           <Skeleton key={i} className="h-16 w-full rounded-lg" />
         ))}
@@ -75,7 +75,8 @@ export default function GuidePage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-8">
+    <>
+      <h1 className="font-decorative mb-6 text-2xl font-semibold">Guide</h1>
       <Input
         type="search"
         placeholder="Search for a character..."
@@ -127,16 +128,31 @@ export default function GuidePage() {
                 />
               )}
               <div className="space-y-1 text-sm">
-                <p>House: {displayValue(selected?.house)}</p>
-                <p>Species: {displayValue(selected?.species)}</p>
-                <p>Ancestry: {displayValue(selected?.ancestry)}</p>
-                <p>Patronus: {displayValue(selected?.patronus)}</p>
-                <p>Wand: {displayWand(selected?.wand)}</p>
+                <p>
+                  <span className="font-medium">House:</span>{' '}
+                  {displayValue(selected?.house)}
+                </p>
+                <p>
+                  <span className="font-medium">Species:</span>{' '}
+                  {displayValue(selected?.species)}
+                </p>
+                <p>
+                  <span className="font-medium">Ancestry:</span>{' '}
+                  {displayValue(selected?.ancestry)}
+                </p>
+                <p>
+                  <span className="font-medium">Patronus:</span>{' '}
+                  {displayValue(selected?.patronus)}
+                </p>
+                <p>
+                  <span className="font-medium">Wand:</span>{' '}
+                  {displayWand(selected?.wand)}
+                </p>
               </div>
             </div>
           )}
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 }

@@ -3,6 +3,7 @@ import { apiFetch } from '@/lib/api';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type Account = {
   username: string;
@@ -35,11 +36,24 @@ function DashboardPage() {
     loadAccount();
   }, []);
 
-  if (!account) return <p className="p-6">Loading…</p>;
+  if (!account) {
+    return (
+      <>
+        <Skeleton className="mb-6 h-8 w-64" />
+        <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton key={i} className="h-28 w-full rounded-xl" />
+          ))}
+        </div>
+        <Skeleton className="mb-8 h-3 w-full rounded-full" />
+        <Skeleton className="h-9 w-48" />
+      </>
+    );
+  }
 
   return (
-    <div className="mx-auto max-w-4xl p-6">
-      <h1 className="mb-6 text-3xl font-bold">
+    <>
+      <h1 className="font-decorative mb-6 text-2xl">
         Welcome back, {account.username}
       </h1>
       <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -101,7 +115,7 @@ function DashboardPage() {
           </Button>
         )}
       </div>
-    </div>
+    </>
   );
 }
 

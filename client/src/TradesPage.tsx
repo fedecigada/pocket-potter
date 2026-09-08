@@ -2,6 +2,7 @@ import { apiFetch } from '@/lib/api';
 import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import type { Exchange } from '@/lib/types';
 import TradeRow from '@/components/TradeRow';
 import {
@@ -123,11 +124,19 @@ export default function TradesPage() {
     loadData();
   }, []);
 
-  if (loading) return <p className="p-6">Loading trades…</p>;
+  if (loading) {
+    return (
+      <div className="space-y-3">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <Skeleton key={i} className="h-20 w-full rounded-lg" />
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <div className="mx-auto max-w-4xl p-6">
-      <h1 className="mb-6 text-3xl font-bold">Trades</h1>
+    <>
+      <h1 className="font-decorative mb-6 text-2xl font-semibold">Trades</h1>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>
           <Button className="mb-6">Propose a trade</Button>
@@ -288,6 +297,6 @@ export default function TradesPage() {
           </ul>
         </TabsContent>
       </Tabs>
-    </div>
+    </>
   );
 }

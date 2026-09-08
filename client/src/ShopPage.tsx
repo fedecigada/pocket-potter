@@ -53,9 +53,12 @@ export default function ShopPage() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-2xl px-8">
-      <h1 className="text-2xl font-bold">Shop</h1>
-      <p className="mt-2 text-muted-foreground">Credits: {credits ?? '...'}</p>
+    <>
+      <h1 className="font-decorative mb-6 text-2xl font-semibold">Shop</h1>
+      <p className="mt-2 text-muted-foreground">
+        Credits:{' '}
+        <span className="text-foreground font-semibold">{credits ?? '…'}</span>
+      </p>
       <div className="mt-6 flex gap-4">
         <Button
           variant="outline"
@@ -73,24 +76,26 @@ export default function ShopPage() {
         </Button>
       </div>
       <div className="mt-6 flex gap-4">
-        <Button onClick={() => buyPack('/api/purchase-pack')} disabled={buying}>
+        <Button
+          onClick={() => buyPack('/api/purchase-pack')}
+          disabled={buying || (credits ?? 0) < 1}
+        >
           Buy pack (5 cards - 1 credit)
         </Button>
         <Button
-          variant="secondary"
           onClick={() => buyPack('/api/purchase-maxi-pack')}
-          disabled={buying}
+          disabled={buying || (credits ?? 0) < 3}
         >
           Buy maxi pack (9 cards - 3 credits)
         </Button>
       </div>
-      {error && <p className="mt-4 text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-destructive">{error}</p>}
       {lastCards.length > 0 && (
         <div className="mt-8">
           <h2 className="mb-4 text-lg font-semibold">You got:</h2>
           <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
             {lastCards.map((card, i) => (
-              <div key={i}>
+              <div key={card.name + i}>
                 <img
                   src={card.image}
                   alt={card.name}
@@ -102,6 +107,6 @@ export default function ShopPage() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

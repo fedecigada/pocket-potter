@@ -153,13 +153,6 @@ async function acceptExchange(req, res, uri, dbName) {
       });
     }
 
-    if (acceptor.album.some((c) => c.hpId === exchange.offeredHpId)) {
-      await resetExchange();
-      return res
-        .status(400)
-        .json({ message: `You already own ${exchange.offeredCardName}` });
-    }
-
     // The six card-moving operations below are not wrapped in a MongoDB
     // transaction (known limitation). The 'processing' lock above prevents
     // concurrent acceptance; on validation failure the status is reset to 'pending'.

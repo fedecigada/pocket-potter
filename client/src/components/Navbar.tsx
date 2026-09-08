@@ -10,8 +10,8 @@ export default function Navbar() {
   }
   return (
     <nav className="border-b">
-      <div className="mx-auto flex max-w-4xl items-center justify-between px-8 py-4">
-        <Link to="/" className="text-xl font-bold">
+      <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+        <Link to="/" className="font-logo text-4xl font-black tracking-wide">
           Pocket Potter
         </Link>
         <div className="flex items-center gap-6">

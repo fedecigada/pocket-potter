@@ -12,9 +12,18 @@ function RegisterPage() {
   const [housePreference, setHousePreference] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [slowServer, setSlowServer] = useState(false);
+
+  function handleSubmit(e: React.SyntheticEvent) {
+    e.preventDefault();
+    handleRegister();
+  }
 
   async function handleRegister() {
     setError('');
+    setLoading(true);
+    const slowTimer = setTimeout(() => setSlowServer(true), 3000);
     try {
       const response = await fetch(`${baseUrl}/api/register`, {
         method: 'POST',
@@ -31,6 +40,10 @@ function RegisterPage() {
       navigate('/login');
     } catch {
       setError('Network error');
+    } finally {
+      clearTimeout(slowTimer);
+      setLoading(false);
+      setSlowServer(false);
     }
   }
 
@@ -40,46 +53,54 @@ function RegisterPage() {
         <CardHeader>
           <CardTitle className="text-2xl">Pocket Potter</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          <Input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <select
-            className="border-input h-9 rounded-md border bg-transparent px-3 text-sm"
-            value={housePreference}
-            onChange={(e) => setHousePreference(e.target.value)}
-          >
-            <option value="">Choose your house (optional)</option>
-            <option value="Gryffindor">Gryffindor</option>
-            <option value="Hufflepuff">Hufflepuff</option>
-            <option value="Ravenclaw">Ravenclaw</option>
-            <option value="Slytherin">Slytherin</option>
-          </select>
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {error && <p className="text-sm text-destructive">{error}</p>}
-          <Button className="w-full" onClick={handleRegister}>
-            Sign up
-          </Button>
-          <p className="text-center text-sm text-muted-foreground">
-            Already have an account?{' '}
-            <Link to="/login" className="underline">
-              Sign in
-            </Link>
-          </p>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <Input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <select
+              className="border-input h-9 rounded-md border bg-transparent px-3 text-sm"
+              value={housePreference}
+              onChange={(e) => setHousePreference(e.target.value)}
+            >
+              <option value="">Choose your house (optional)</option>
+              <option value="Gryffindor">Gryffindor</option>
+              <option value="Hufflepuff">Hufflepuff</option>
+              <option value="Ravenclaw">Ravenclaw</option>
+              <option value="Slytherin">Slytherin</option>
+            </select>
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {error && <p className="text-sm text-destructive">{error}</p>}
+            {slowServer && (
+              <p className="text-center text-sm text-muted-foreground">
+                Starting the server - free hosting puts it to sleep when unused.
+                This can take up to a minute.
+              </p>
+            )}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? 'Creating account…' : 'Sign up'}
+            </Button>
+            <p className="text-center text-sm text-muted-foreground">
+              Already have an account?{' '}
+              <Link to="/login" className="underline">
+                Sign in
+              </Link>
+            </p>
+          </form>
         </CardContent>
       </Card>
     </div>

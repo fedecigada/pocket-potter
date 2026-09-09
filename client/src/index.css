@@ -4,7 +4,7 @@
 @import '@fontsource-variable/inter';
 @font-face {
   font-family: 'Harry P';
-  src: url('./assets/fonts/HarryP.ttf') format('truetype');
+  src: url('./assets/fonts/HARRYP__.ttf') format('truetype');
   font-weight: 400;
   font-display: swap;
 }
@@ -13,14 +13,6 @@
   src: url('./assets/fonts/Cinzel/Cinzel-VariableFont_wght.ttf')
     format('truetype-variations');
   font-weight: 400 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Cinzel Decorative';
-  src: url('./assets/fonts/Cinzel_Decorative/CinzelDecorative-Black.ttf')
-    format('truetype');
-  font-weight: 900;
   font-display: swap;
 }
 
@@ -169,9 +161,7 @@
 }
 
 .card-back-text {
-  font-family: 'Cinzel Decorative', serif;
-  font-weight: 900;
-  letter-spacing: -0.05em;
+  font-family: 'Harry P', serif;
 }
 
 @layer base {

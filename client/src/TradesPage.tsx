@@ -182,7 +182,7 @@ export default function TradesPage() {
             </div>
 
             {proposeError && (
-              <p className="text-sm text-destructive">{proposeError}</p>
+              <p className="text-destructive text-sm">{proposeError}</p>
             )}
             <Button
               onClick={handlePropose}
@@ -288,7 +288,7 @@ export default function TradesPage() {
             {history.map((trade) => (
               <TradeRow key={trade._id} trade={trade}>
                 {trade.acceptorName && (
-                  <span className="shrink-0 text-sm text-muted-foreground">
+                  <span className="text-muted-foreground shrink-0 text-sm">
                     accepted by {trade.acceptorName}
                   </span>
                 )}

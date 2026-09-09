@@ -60,7 +60,7 @@ function DashboardPage() {
         <Card>
           <CardContent className="pt-6 text-center">
             <p className="text-4xl font-bold">{account.credits}</p>
-            <p className="text-sm text-muted-foreground">Credits</p>
+            <p className="text-muted-foreground text-sm">Credits</p>
           </CardContent>
         </Card>
 
@@ -68,11 +68,11 @@ function DashboardPage() {
           <CardContent className="pt-6 text-center">
             <p className="text-4xl font-bold">
               {account.statistics.uniqueCards}
-              <span className="text-xl text-muted-foreground">
+              <span className="text-muted-foreground text-xl">
                 /{account.statistics.totalCollectionSize}
               </span>
             </p>
-            <p className="text-sm text-muted-foreground">Cards collected</p>
+            <p className="text-muted-foreground text-sm">Cards collected</p>
           </CardContent>
         </Card>
 
@@ -81,7 +81,7 @@ function DashboardPage() {
             <p className="text-4xl font-bold">
               {account.statistics.completedExchanges}
             </p>
-            <p className="text-sm text-muted-foreground">Trades completed</p>
+            <p className="text-muted-foreground text-sm">Trades completed</p>
           </CardContent>
         </Card>
       </div>
@@ -92,9 +92,9 @@ function DashboardPage() {
             {account.statistics.completionPercentage}%
           </span>
         </div>
-        <div className="h-3 w-full overflow-hidden rounded-full bg-muted">
+        <div className="bg-muted h-3 w-full overflow-hidden rounded-full">
           <div
-            className="h-full rounded-full bg-primary transition-all"
+            className="bg-primary h-full rounded-full transition-all"
             style={{ width: `${account.statistics.completionPercentage}%` }}
           />
         </div>

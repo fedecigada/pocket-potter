@@ -100,7 +100,7 @@ export default function AlbumPage() {
                 />
                 <div className="card-face card-face-back flex items-center justify-center rounded-2xl bg-black">
                   <div className="absolute inset-2 rounded-xl border-2 border-white" />
-                  <span className="card-back-text text-6xl text-white">
+                  <span className="card-back-text text-7xl text-white">
                     P<span className="inline-block translate-y-3">P</span>
                   </span>
                 </div>

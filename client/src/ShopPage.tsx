@@ -55,7 +55,7 @@ export default function ShopPage() {
   return (
     <>
       <h1 className="font-decorative mb-6 text-2xl font-semibold">Shop</h1>
-      <p className="mt-2 text-muted-foreground">
+      <p className="text-muted-foreground mt-2">
         Credits:{' '}
         <span className="text-foreground font-semibold">{credits ?? '…'}</span>
       </p>
@@ -89,7 +89,7 @@ export default function ShopPage() {
           Buy maxi pack (9 cards - 3 credits)
         </Button>
       </div>
-      {error && <p className="mt-4 text-destructive">{error}</p>}
+      {error && <p className="text-destructive mt-4">{error}</p>}
       {lastCards.length > 0 && (
         <div className="mt-8">
           <h2 className="mb-4 text-lg font-semibold">You got:</h2>

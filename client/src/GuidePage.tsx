@@ -95,7 +95,7 @@ export default function GuidePage() {
                 runs openDetails with that character only when clicked. */}
               <button
                 onClick={() => openDetails(char)}
-                className="flex w-full items-center gap-4 py-3 text-left hover:bg-accent"
+                className="hover:bg-accent flex w-full items-center gap-4 py-3 text-left"
               >
                 <img
                   src={char.image}
@@ -104,7 +104,7 @@ export default function GuidePage() {
                 />
                 <div>
                   <p className="font-medium">{char.name}</p>
-                  <p className="text-sm text-muted-foreground">{char.house}</p>
+                  <p className="text-muted-foreground text-sm">{char.house}</p>
                 </div>
               </button>
             </li>

@@ -48,10 +48,12 @@ function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-svh items-center justify-center bg-muted">
+    <div className="bg-muted flex min-h-svh items-center justify-center">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Pocket Potter</CardTitle>
+          <CardTitle className="font-logo text-center text-4xl font-black tracking-wide">
+            PocketPotter
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -84,9 +86,9 @@ function RegisterPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {error && <p className="text-sm text-destructive">{error}</p>}
+            {error && <p className="text-destructive text-sm">{error}</p>}
             {slowServer && (
-              <p className="text-center text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-center text-sm">
                 Starting the server - free hosting puts it to sleep when unused.
                 This can take up to a minute.
               </p>
@@ -94,7 +96,7 @@ function RegisterPage() {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Creating account…' : 'Sign up'}
             </Button>
-            <p className="text-center text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-center text-sm">
               Already have an account?{' '}
               <Link to="/login" className="underline">
                 Sign in

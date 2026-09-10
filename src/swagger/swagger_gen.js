@@ -7,6 +7,15 @@ const doc = {
   },
   host: 'localhost:3100',
   schemes: ['http'],
+  securityDefinitions: {
+    bearerAuth: {
+      type: 'apiKey',
+      name: 'Authorization',
+      in: 'header',
+      description:
+        'Paste: Bearer YOUR_TOKEN (include the word Bearer and a space)',
+    },
+  },
   tags: [
     {
       name: 'User',
@@ -50,6 +59,7 @@ const doc = {
       totalCards: 15,
       uniqueCards: 10,
       duplicateCards: 5,
+      totalCollectionSize: 25,
       completionPercentage: 40,
       completedExchanges: 7,
       houseDistribution: [
@@ -69,18 +79,19 @@ const doc = {
     },
     ExchangeRequest: {
       offeredHpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
-      offeredCardName: 'Harry Potter',
-      offeredImage: 'https://hp-api.herokuapp.com/images/harry.jpg',
-      requestedHpId: 'some-other-uuid',
-      requestedCardName: 'Hermione Granger',
+      requestedHpId: 'a1b2c3d4-0000-1111-2222-333344445555',
     },
     ExchangeResponse: {
       _id: '507f1f77bcf86cd799439011',
+      proposer: '507f1f77bcf86cd799439012',
       offeredHpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
       offeredCardName: 'Harry Potter',
       offeredImage: 'https://hp-api.herokuapp.com/images/harry.jpg',
-      requestedHpId: 'some-other-uuid',
+      offeredHouse: 'Gryffindor',
+      requestedHpId: 'a1b2c3d4-0000-1111-2222-333344445555',
       requestedCardName: 'Hermione Granger',
+      requestedImage: 'https://hp-api.herokuapp.com/images/hermione.jpg',
+      requestedHouse: 'Gryffindor',
       status: 'pending',
     },
     AcceptExchangeRequest: {
@@ -96,7 +107,6 @@ const doc = {
         {
           hpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
           name: 'Harry Potter',
-          house: 'Gryffindor',
           image: 'https://hp-api.herokuapp.com/images/harry.jpg',
           quantity: 2,
         },

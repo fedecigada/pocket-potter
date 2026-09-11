@@ -6,7 +6,7 @@ sold back for credits or put up on a peer-to-peer trade board, where another col
 one-for-one swap. Character data comes from the public HP-API and is snapshotted into MongoDB, so
 the card list is fixed and the same for everyone.
 
-Live demo: <!-- TODO: demo URL -->
+Live demo: https://pocket-potter.vercel.app
 
 ## Screenshots
 

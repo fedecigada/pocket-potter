@@ -5,7 +5,7 @@
     "description": "Swagger for the PocketPotter project",
     "version": "1.0.0"
   },
-  "host": "localhost:3100",
+  "host": "pocket-potter.onrender.com",
   "basePath": "/",
   "tags": [
     {
@@ -30,7 +30,7 @@
     }
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "securityDefinitions": {
     "bearerAuth": {

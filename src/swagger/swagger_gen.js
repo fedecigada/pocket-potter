@@ -5,8 +5,8 @@ const doc = {
     title: 'PocketPotter API',
     description: 'Swagger for the PocketPotter project',
   },
-  host: 'localhost:3100',
-  schemes: ['http'],
+  host: 'pocket-potter.onrender.com',
+  schemes: ['https'],
   securityDefinitions: {
     bearerAuth: {
       type: 'apiKey',

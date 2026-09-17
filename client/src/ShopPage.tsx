@@ -21,7 +21,7 @@ export default function ShopPage() {
     const data = await response.json();
 
     if (!response.ok) {
-      setError(data.message);
+      setError(data.message || 'Could not buy credits');
     } else {
       setCredits(data.credits);
     }
@@ -35,7 +35,7 @@ export default function ShopPage() {
     const data = await response.json();
 
     if (!response.ok) {
-      setError(data.message);
+      setError(data.message || 'Could not buy pack');
     } else {
       setCredits(data.remainingCredits);
       setLastCards(data.cards);

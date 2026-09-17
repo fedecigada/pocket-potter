@@ -84,7 +84,7 @@ export default function TradesPage() {
     const data = await response.json();
 
     if (!response.ok) {
-      setProposeError(data.error || data.message || 'Could not propose trade');
+      setProposeError(data.message || 'Could not propose trade');
       return;
     }
 
@@ -107,7 +107,7 @@ export default function TradesPage() {
     });
     if (!response.ok) {
       const data = await response.json();
-      alert(data.error || data.message || 'Could not accept trade');
+      alert(data.message || 'Could not accept trade');
     }
     loadData();
   }

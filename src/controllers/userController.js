@@ -88,9 +88,6 @@ async function updateAccount(req, res, uri, dbName) {
     const userId = req.userId;
     const { username, email, housePreference, password } = req.body;
 
-    client = await new MongoClient(uri).connect();
-    const db = client.db(dbName);
-
     const updateFields = {};
     if (username) updateFields.username = username;
     if (email) updateFields.email = email;
@@ -99,6 +96,15 @@ async function updateAccount(req, res, uri, dbName) {
       const hashedPassword = await bcryptjs.hash(password, saltRounds);
       updateFields.password = hashedPassword;
     }
+
+    if (Object.keys(updateFields).length === 0) {
+      return res.status(400).json({
+        message: 'Provide at least one field to update',
+      });
+    }
+
+    client = await new MongoClient(uri).connect();
+    const db = client.db(dbName);
 
     const result = await db
       .collection('users')

@@ -14,7 +14,7 @@ async function purchaseCredits(req, res, uri, dbName) {
       credits > MAX_CREDITS_PER_PURCHASE
     ) {
       return res.status(400).json({
-        error: `credits must be an integer between 1 and ${MAX_CREDITS_PER_PURCHASE}`,
+        message: `credits must be an integer between 1 and ${MAX_CREDITS_PER_PURCHASE}`,
       });
     }
     client = await new MongoClient(uri).connect();

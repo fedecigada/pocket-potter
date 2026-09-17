@@ -9,7 +9,7 @@ async function register(req, res, uri, dbName) {
   try {
     const { username, email, password, housePreference } = req.body;
     if (!username || !email || !password) {
-      return res.status(400).json({ error: 'All fields are required' });
+      return res.status(400).json({ message: 'All fields are required' });
     }
     client = await new MongoClient(uri).connect();
     const db = client.db(dbName);
@@ -29,7 +29,7 @@ async function register(req, res, uri, dbName) {
     res.json({ message: 'User registered successfully', user: newUser });
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(400).json({ error: 'Email already registered' });
+      return res.status(400).json({ message: 'Email already registered' });
     }
     res.status(500).json({ error: error.message });
   } finally {
@@ -45,7 +45,9 @@ async function login(req, res, uri, dbName) {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required' });
+      return res
+        .status(400)
+        .json({ message: 'Email and password are required' });
     }
     client = await new MongoClient(uri).connect();
     const db = client.db(dbName);
@@ -114,7 +116,7 @@ async function updateAccount(req, res, uri, dbName) {
     });
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(400).json({ error: 'Email already in use' });
+      return res.status(400).json({ message: 'Email already in use' });
     }
     res.status(500).json({ error: error.message });
   } finally {

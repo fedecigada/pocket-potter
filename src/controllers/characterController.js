@@ -30,7 +30,7 @@ async function getCharacterById(req, res, uri, dbName) {
     const hpId = req.params.id;
 
     if (!hpId) {
-      return res.status(400).json({ error: 'Character ID is required' });
+      return res.status(400).json({ message: 'Character ID is required' });
     }
 
     client = await MongoClient.connect(uri);
@@ -66,7 +66,7 @@ async function getCharacterDetails(req, res, uri, dbName) {
     const hpId = req.params.id;
 
     if (!hpId) {
-      return res.status(400).json({ error: 'Character ID is required' });
+      return res.status(400).json({ message: 'Character ID is required' });
     }
 
     client = await MongoClient.connect(uri);

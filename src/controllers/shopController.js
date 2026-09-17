@@ -1,14 +1,21 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 const { getRandomInt } = require('./harryPotterAPI');
+const MAX_CREDITS_PER_PURCHASE = 100;
 
 async function purchaseCredits(req, res, uri, dbName) {
   let client;
   try {
     const userId = req.userId;
     const { credits } = req.body;
-    if (!credits || credits <= 0) {
-      return res.status(400).json({ error: 'credits (positive) is required' });
+    if (
+      !Number.isInteger(credits) ||
+      credits <= 0 ||
+      credits > MAX_CREDITS_PER_PURCHASE
+    ) {
+      return res.status(400).json({
+        error: `credits must be an integer between 1 and ${MAX_CREDITS_PER_PURCHASE}`,
+      });
     }
     client = await new MongoClient(uri).connect();
     const db = client.db(dbName);

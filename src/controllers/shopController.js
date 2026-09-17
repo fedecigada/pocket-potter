@@ -34,7 +34,8 @@ async function purchaseCredits(req, res, uri, dbName) {
       credits: result.credits,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error purchasing credits:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -67,7 +68,7 @@ async function purchasePack(req, res, uri, dbName) {
       .find({})
       .toArray();
     if (!availableCards.length) {
-      return res.status(500).json({ error: 'No characters available' });
+      return res.status(500).json({ message: 'No characters available' });
     }
 
     // Generate a random pack from the database
@@ -125,7 +126,8 @@ async function purchasePack(req, res, uri, dbName) {
       remainingCredits: result.credits,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error purchasing pack:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();

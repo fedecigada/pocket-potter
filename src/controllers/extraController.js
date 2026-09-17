@@ -46,7 +46,8 @@ async function sellSticker(req, res, uri, dbName) {
       remainingCredits: updatedUser.credits,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error selling card:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -79,7 +80,7 @@ async function purchaseMaxiPack(req, res, uri, dbName) {
       .find({})
       .toArray();
     if (!availableCards.length) {
-      return res.status(500).json({ error: 'No characters available' });
+      return res.status(500).json({ message: 'No characters available' });
     }
 
     // Generates a random pack from the database
@@ -137,7 +138,8 @@ async function purchaseMaxiPack(req, res, uri, dbName) {
       remainingCredits: result.credits,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error purchasing maxi pack:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();

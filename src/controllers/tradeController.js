@@ -78,7 +78,7 @@ async function proposeExchange(req, res, uri, dbName) {
     });
   } catch (error) {
     console.error('Error proposing exchange:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -240,7 +240,7 @@ async function acceptExchange(req, res, uri, dbName) {
     res.json({ message: 'Exchange completed successfully' });
   } catch (error) {
     console.error('Error accepting exchange:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -283,7 +283,8 @@ async function getExchanges(req, res, uri, dbName) {
       exchanges,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error getting exchanges:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -312,7 +313,8 @@ async function getUserExchanges(req, res, uri, dbName) {
       exchanges,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error getting user exchanges:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -356,7 +358,7 @@ async function getCompletedExchanges(req, res, uri, dbName) {
     });
   } catch (error) {
     console.error('Error retrieving completed exchanges:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -394,7 +396,8 @@ async function cancelExchange(req, res, uri, dbName) {
 
     res.json({ message: 'Exchange cancelled successfully' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error cancelling exchange:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();

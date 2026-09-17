@@ -15,8 +15,8 @@ async function getCharacters(req, res, uri, dbName) {
 
     res.json({ characters });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error retrieving characters' });
+    console.error('Error retrieving characters:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -51,8 +51,8 @@ async function getCharacterById(req, res, uri, dbName) {
       image: character.image,
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error retrieving character' });
+    console.error('Error retrieving characters by id:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -88,8 +88,8 @@ async function getCharacterDetails(req, res, uri, dbName) {
       wand: character.wand,
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error retrieving details' });
+    console.error('Error retrieving character details:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();

@@ -31,7 +31,8 @@ async function register(req, res, uri, dbName) {
     if (error.code === 11000) {
       return res.status(400).json({ message: 'Email already registered' });
     }
-    res.status(500).json({ error: error.message });
+    console.error('Error registering user:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -72,7 +73,8 @@ async function login(req, res, uri, dbName) {
 
     res.json({ message: 'Login successful', user, token });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -118,7 +120,8 @@ async function updateAccount(req, res, uri, dbName) {
     if (error.code === 11000) {
       return res.status(400).json({ message: 'Email already in use' });
     }
-    res.status(500).json({ error: error.message });
+    console.error('Error updating user:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -143,7 +146,8 @@ async function deleteAccount(req, res, uri, dbName) {
     }
     res.json({ message: 'Account deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error deleting account:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -253,7 +257,8 @@ async function getAccount(req, res, uri, dbName) {
       account: accountDetails,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error getting account:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -310,7 +315,8 @@ async function getAlbum(req, res, uri, dbName) {
       album,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error getting album:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();
@@ -351,7 +357,8 @@ async function getDuplicates(req, res, uri, dbName) {
       duplicates,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error getting duplicates:', error);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     if (client) {
       await client.close();

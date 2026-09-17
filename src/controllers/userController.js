@@ -142,7 +142,10 @@ async function deleteAccount(req, res, uri, dbName) {
 
     client = await new MongoClient(uri).connect();
     const db = client.db(dbName);
-
+    await db.collection('exchanges').deleteMany({
+      proposer: ObjectId.createFromHexString(userId),
+      status: 'pending',
+    });
     const result = await db
       .collection('users')
       .findOneAndDelete({ _id: ObjectId.createFromHexString(userId) });

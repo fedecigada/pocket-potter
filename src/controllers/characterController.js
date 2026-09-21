@@ -10,7 +10,7 @@ async function getCharacters(req, res, uri, dbName) {
       .collection('card_collection')
       .find({})
       .sort({ index: 1 })
-      .project({ hpId: 1, index: 1, name: 1, house: 1, image: 1 })
+      .project({ _id: 0, hpId: 1, index: 1, name: 1, house: 1, image: 1 })
       .toArray();
 
     res.json({ characters });

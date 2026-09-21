@@ -9,5 +9,6 @@ export type Exchange = {
   requestedImage: string;
   requestedHouse: string;
   status: 'pending' | 'processing' | 'completed';
+  proposerName?: string;
   acceptorName?: string;
 };

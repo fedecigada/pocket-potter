@@ -208,42 +208,49 @@ export default function TradesPage() {
 
               return (
                 <TradeRow key={trade._id} trade={trade}>
-                  {!canAccept ? (
-                    <Button size="sm" disabled>
-                      Need a duplicate
-                    </Button>
-                  ) : alreadyOwns ? (
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button size="sm" variant="outline">
-                          Accept
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            You already own this card
-                          </AlertDialogTitle>
-                          <AlertDialogDescription>
-                            You already have {trade.offeredCardName}. Accepting
-                            will give you a duplicate. Continue?
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Never mind</AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => handleAccept(trade._id)}
-                          >
-                            Accept anyway
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  ) : (
-                    <Button size="sm" onClick={() => handleAccept(trade._id)}>
-                      Accept
-                    </Button>
-                  )}
+                  <div className="flex shrink-0 items-center gap-3">
+                    {trade.proposerName && (
+                      <span className="text-muted-foreground text-sm">
+                        offered by {trade.proposerName}
+                      </span>
+                    )}
+                    {!canAccept ? (
+                      <Button size="sm" disabled>
+                        Need a duplicate
+                      </Button>
+                    ) : alreadyOwns ? (
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button size="sm" variant="outline">
+                            Accept
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              You already own this card
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              You already have {trade.offeredCardName}.
+                              Accepting will give you a duplicate. Continue?
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Never mind</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => handleAccept(trade._id)}
+                            >
+                              Accept anyway
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    ) : (
+                      <Button size="sm" onClick={() => handleAccept(trade._id)}>
+                        Accept
+                      </Button>
+                    )}
+                  </div>
                 </TradeRow>
               );
             })}
@@ -289,7 +296,9 @@ export default function TradesPage() {
               <TradeRow key={trade._id} trade={trade}>
                 {trade.acceptorName && (
                   <span className="text-muted-foreground shrink-0 text-sm">
-                    accepted by {trade.acceptorName}
+                    {trade.proposerName
+                      ? `${trade.proposerName} ⇄ ${trade.acceptorName}`
+                      : `accepted by ${trade.acceptorName}`}
                   </span>
                 )}
               </TradeRow>

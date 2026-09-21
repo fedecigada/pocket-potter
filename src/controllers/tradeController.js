@@ -59,6 +59,7 @@ async function proposeExchange(req, res, uri, dbName) {
 
     const newExchange = {
       proposer: ObjectId.createFromHexString(userId),
+      proposerName: user.username,
       offeredHpId,
       offeredCardName: offeredFromCollection.name,
       offeredImage: offeredFromCollection.image,

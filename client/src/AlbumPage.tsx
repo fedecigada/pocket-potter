@@ -3,8 +3,7 @@ import { apiFetch } from '@/lib/api';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-const gridClasses =
-  'grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5';
+const gridClasses = 'grid grid-cols-3 gap-4 sm:grid-cols-4 lg:grid-cols-5';
 type Card = {
   hpId: string;
   name: string;

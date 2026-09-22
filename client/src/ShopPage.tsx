@@ -59,7 +59,7 @@ export default function ShopPage() {
         Credits:{' '}
         <span className="text-foreground font-semibold">{credits ?? '…'}</span>
       </p>
-      <div className="mt-6 flex gap-4">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:gap-4">
         <Button
           variant="outline"
           onClick={() => buyCredits(5)}
@@ -75,7 +75,7 @@ export default function ShopPage() {
           Buy 10 credits
         </Button>
       </div>
-      <div className="mt-6 flex gap-4">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:gap-4">
         <Button
           onClick={() => buyPack('/api/purchase-pack')}
           disabled={buying || (credits ?? 0) < 1}

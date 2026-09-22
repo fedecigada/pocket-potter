@@ -183,7 +183,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "All fields are required"
                 }
@@ -194,11 +194,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -345,7 +345,7 @@
             }
           },
           "400": {
-            "description": "email or password missing (error: \"Email and password are required\"), or unknown email or wrong password (message: \"Invalid credentials\")",
+            "description": "email or password missing (\"Email and password are required\"), or unknown email or wrong password (\"Invalid credentials\")",
             "schema": {
               "type": "object",
               "properties": {
@@ -360,11 +360,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -382,7 +382,7 @@
         "tags": [
           "User"
         ],
-        "description": "Update authenticated user account details. Every field is optional; only the fields present in the body are changed. Sending an empty body results in a server error.",
+        "description": "Update authenticated user account details. Every field is optional; only the fields present in the body are changed.",
         "parameters": [
           {
             "name": "authorization",
@@ -528,13 +528,13 @@
             }
           },
           "400": {
-            "description": "The chosen email is already used by another account",
+            "description": "The body has no updatable field (\"Provide at least one field to update\"), or the chosen email is already used by another account (\"Email already in use\")",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Email already in use"
+                  "example": "Provide at least one field to update"
                 }
               },
               "xml": {
@@ -543,13 +543,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -573,11 +573,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -625,13 +625,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -655,11 +655,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -773,13 +773,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -803,11 +803,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -884,13 +884,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -914,11 +914,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -994,13 +994,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -1024,11 +1024,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -1051,7 +1051,7 @@
         "tags": [
           "Shop"
         ],
-        "description": "Add virtual credits to the authenticated user. The returned credits value is the new balance, not the amount added.",
+        "description": "Add virtual credits to the authenticated user. credits must be an integer between 1 and 100. The returned credits value is the new balance, not the amount added.",
         "parameters": [
           {
             "name": "authorization",
@@ -1061,7 +1061,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Number of credits to add; must be a positive number",
+            "description": "Number of credits to add; must be an integer between 1 and 100",
             "required": true,
             "schema": {
               "type": "object",
@@ -1087,7 +1087,7 @@
                       "properties": {
                         "type": {
                           "type": "string",
-                          "example": "number"
+                          "example": "integer"
                         },
                         "example": {
                           "type": "number",
@@ -1122,13 +1122,13 @@
             }
           },
           "400": {
-            "description": "credits is missing, zero or negative",
+            "description": "credits is missing or is not an integer between 1 and 100",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "credits (positive) is required"
+                  "example": "credits must be an integer between 1 and 100"
                 }
               },
               "xml": {
@@ -1137,13 +1137,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -1167,11 +1167,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -1258,13 +1258,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -1288,11 +1288,11 @@
             }
           },
           "500": {
-            "description": "Server error. Returns { error: \"No characters available\" } when the card collection is empty, otherwise { error: <underlying error message> }",
+            "description": "Server error. The body is { message: \"No characters available\" } when the card collection is empty, otherwise { message: \"Internal server error\" }",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "No characters available"
                 }
@@ -1315,7 +1315,7 @@
         "tags": [
           "Characters"
         ],
-        "description": "Get every card in the collection, sorted by index ascending. Each item carries _id, hpId, index, name, house and image.",
+        "description": "Get every card in the collection, sorted by index ascending. Each item carries hpId, index, name, house and image (no _id).",
         "parameters": [
           {
             "name": "authorization",
@@ -1334,10 +1334,6 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "_id": {
-                        "type": "string",
-                        "example": "507f1f77bcf86cd799439011"
-                      },
                       "hpId": {
                         "type": "string",
                         "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
@@ -1368,13 +1364,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -1383,13 +1379,13 @@
             }
           },
           "500": {
-            "description": "Server error",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Error retrieving characters"
+                  "example": "Internal server error"
                 }
               },
               "xml": {
@@ -1463,7 +1459,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Character ID is required"
                 }
@@ -1474,13 +1470,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -1504,13 +1500,13 @@
             }
           },
           "500": {
-            "description": "Server error",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Error retrieving character"
+                  "example": "Internal server error"
                 }
               },
               "xml": {
@@ -1601,7 +1597,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Character ID is required"
                 }
@@ -1612,13 +1608,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -1642,13 +1638,13 @@
             }
           },
           "500": {
-            "description": "Server error",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Error retrieving details"
+                  "example": "Internal server error"
                 }
               },
               "xml": {
@@ -1754,6 +1750,10 @@
                       "type": "string",
                       "example": "507f1f77bcf86cd799439012"
                     },
+                    "proposerName": {
+                      "type": "string",
+                      "example": "mario.rossi"
+                    },
                     "offeredHpId": {
                       "type": "string",
                       "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
@@ -1799,7 +1799,7 @@
             }
           },
           "400": {
-            "description": "offeredHpId or requestedHpId missing (\"offeredHpId and requestedHpId are required\"); the two ids are equal (\"The offered and requested cards must be different\"); the proposer holds 1 or 0 copies of the offered card (\"You do not have enough copies of <name>\"); or the proposer already owns the requested card (\"You already own <name>\")",
+            "description": "offeredHpId or requestedHpId missing (\"offeredHpId and requestedHpId are required\"); the two ids are equal (\"The offered and requested cards must be different\"); the proposer holds 1 or 0 copies of the offered card (\"You do not have enough copies of the offered card name\"); or the proposer already owns the requested card (\"You already own the requested card name\")",
             "schema": {
               "type": "object",
               "properties": {
@@ -1814,13 +1814,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -1844,11 +1844,11 @@
             }
           },
           "500": {
-            "description": "Server error; always returns this fixed body",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -1938,7 +1938,7 @@
             }
           },
           "400": {
-            "description": "The proposer no longer holds a duplicate of the offered card (\"The proposer no longer has a duplicate of <name>\"), or the acceptor does not hold a duplicate of the requested card (\"You do not have a duplicate of <name>\")",
+            "description": "The proposer no longer holds a duplicate of the offered card (\"The proposer no longer has a duplicate of the offered card name\"), or the acceptor does not hold a duplicate of the requested card (\"You do not have a duplicate of the requested card name\")",
             "schema": {
               "type": "object",
               "properties": {
@@ -1953,13 +1953,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -1998,11 +1998,11 @@
             }
           },
           "500": {
-            "description": "Server error; always returns this fixed body",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -2070,6 +2070,10 @@
                         "type": "string",
                         "example": "507f1f77bcf86cd799439012"
                       },
+                      "proposerName": {
+                        "type": "string",
+                        "example": "mario.rossi"
+                      },
                       "offeredHpId": {
                         "type": "string",
                         "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
@@ -2116,13 +2120,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -2131,11 +2135,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -2189,6 +2193,10 @@
                         "type": "string",
                         "example": "507f1f77bcf86cd799439012"
                       },
+                      "proposerName": {
+                        "type": "string",
+                        "example": "mario.rossi"
+                      },
                       "offeredHpId": {
                         "type": "string",
                         "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
@@ -2235,13 +2243,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -2250,11 +2258,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -2307,6 +2315,10 @@
                       "proposer": {
                         "type": "string",
                         "example": "507f1f77bcf86cd799439012"
+                      },
+                      "proposerName": {
+                        "type": "string",
+                        "example": "mario.rossi"
                       },
                       "offeredHpId": {
                         "type": "string",
@@ -2362,13 +2374,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -2392,11 +2404,11 @@
             }
           },
           "500": {
-            "description": "Server error; always returns this fixed body",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -2452,13 +2464,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -2497,11 +2509,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -2610,13 +2622,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -2640,11 +2652,11 @@
             }
           },
           "500": {
-            "description": "Server error; the error field carries the underlying error message",
+            "description": "Server error; the body is always this fixed object",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "Internal server error"
                 }
@@ -2731,13 +2743,13 @@
             }
           },
           "401": {
-            "description": "Missing, malformed, invalid or expired token",
+            "description": "Missing or malformed Authorization header, or invalid or expired token",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
-                  "example": "Missing token"
+                  "example": "Missing or malformed Authorization header"
                 }
               },
               "xml": {
@@ -2761,11 +2773,11 @@
             }
           },
           "500": {
-            "description": "Server error. Returns { error: \"No characters available\" } when the card collection is empty, otherwise { error: <underlying error message> }",
+            "description": "Server error. The body is { message: \"No characters available\" } when the card collection is empty, otherwise { message: \"Internal server error\" }",
             "schema": {
               "type": "object",
               "properties": {
-                "error": {
+                "message": {
                   "type": "string",
                   "example": "No characters available"
                 }
@@ -2943,6 +2955,10 @@
           "type": "string",
           "example": "507f1f77bcf86cd799439012"
         },
+        "proposerName": {
+          "type": "string",
+          "example": "mario.rossi"
+        },
         "offeredHpId": {
           "type": "string",
           "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
@@ -2978,6 +2994,67 @@
         "status": {
           "type": "string",
           "example": "pending"
+        }
+      }
+    },
+    "CompletedExchangeResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439011"
+        },
+        "proposer": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439012"
+        },
+        "proposerName": {
+          "type": "string",
+          "example": "mario.rossi"
+        },
+        "offeredHpId": {
+          "type": "string",
+          "example": "9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8"
+        },
+        "offeredCardName": {
+          "type": "string",
+          "example": "Harry Potter"
+        },
+        "offeredImage": {
+          "type": "string",
+          "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+        },
+        "offeredHouse": {
+          "type": "string",
+          "example": "Gryffindor"
+        },
+        "requestedHpId": {
+          "type": "string",
+          "example": "a1b2c3d4-0000-1111-2222-333344445555"
+        },
+        "requestedCardName": {
+          "type": "string",
+          "example": "Hermione Granger"
+        },
+        "requestedImage": {
+          "type": "string",
+          "example": "https://hp-api.herokuapp.com/images/hermione.jpg"
+        },
+        "requestedHouse": {
+          "type": "string",
+          "example": "Gryffindor"
+        },
+        "status": {
+          "type": "string",
+          "example": "completed"
+        },
+        "acceptor": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439013"
+        },
+        "acceptorName": {
+          "type": "string",
+          "example": "luigi.verdi"
         }
       }
     },

@@ -58,11 +58,11 @@ app.post('/api/register', async (req, res) => {
   }
   #swagger.responses[400] = {
       description: 'username, email or password missing ("All fields are required"), or the email is already registered ("Email already registered")',
-      schema: { error: 'All fields are required' }
+      schema: { message: 'All fields are required' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await userController.register(req, res, uri, dbName);
@@ -106,12 +106,12 @@ app.post('/api/login', async (req, res) => {
       }
   }
   #swagger.responses[400] = {
-      description: 'email or password missing (error: "Email and password are required"), or unknown email or wrong password (message: "Invalid credentials")',
+      description: 'email or password missing ("Email and password are required"), or unknown email or wrong password ("Invalid credentials")',
       schema: { message: 'Invalid credentials' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await userController.login(req, res, uri, dbName);
@@ -119,7 +119,7 @@ app.post('/api/login', async (req, res) => {
 
 app.put('/api/account/update', authMiddleware, async (req, res) => {
   // #swagger.tags = ['User']
-  // #swagger.description = 'Update authenticated user account details. Every field is optional; only the fields present in the body are changed. Sending an empty body results in a server error.'
+  // #swagger.description = 'Update authenticated user account details. Every field is optional; only the fields present in the body are changed.'
   // #swagger.security = [{ "bearerAuth": [] }]
   /* #swagger.parameters['body'] = {
       in: 'body',
@@ -156,20 +156,20 @@ app.put('/api/account/update', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[400] = {
-      description: 'The chosen email is already used by another account',
-      schema: { error: 'Email already in use' }
+      description: 'The body has no updatable field ("Provide at least one field to update"), or the chosen email is already used by another account ("Email already in use")',
+      schema: { message: 'Provide at least one field to update' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await userController.updateAccount(req, res, uri, dbName);
@@ -185,16 +185,16 @@ app.delete('/api/account/delete', authMiddleware, async (req, res) => {
       schema: { message: 'Account deleted successfully' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await userController.deleteAccount(req, res, uri, dbName);
@@ -230,16 +230,16 @@ app.get('/api/account', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await userController.getAccount(req, res, uri, dbName);
@@ -276,16 +276,16 @@ app.get('/api/album', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await userController.getAlbum(req, res, uri, dbName);
@@ -310,16 +310,16 @@ app.get('/api/album/duplicates', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await userController.getDuplicates(req, res, uri, dbName);
@@ -328,17 +328,17 @@ app.get('/api/album/duplicates', authMiddleware, async (req, res) => {
 // Shop
 app.post('/api/purchase-credits', authMiddleware, async (req, res) => {
   // #swagger.tags = ['Shop']
-  // #swagger.description = 'Add virtual credits to the authenticated user. The returned credits value is the new balance, not the amount added.'
+  // #swagger.description = 'Add virtual credits to the authenticated user. credits must be an integer between 1 and 100. The returned credits value is the new balance, not the amount added.'
   // #swagger.security = [{ "bearerAuth": [] }]
   /* #swagger.parameters['body'] = {
       in: 'body',
-      description: 'Number of credits to add; must be a positive number',
+      description: 'Number of credits to add; must be an integer between 1 and 100',
       required: true,
       schema: {
           type: 'object',
           required: ['credits'],
           properties: {
-              credits: { type: 'number', example: 1 }
+              credits: { type: 'integer', example: 1 }
           }
       }
   } */
@@ -348,20 +348,20 @@ app.post('/api/purchase-credits', authMiddleware, async (req, res) => {
       schema: { message: 'Credits purchased', credits: 5 }
   }
   #swagger.responses[400] = {
-      description: 'credits is missing, zero or negative',
-      schema: { error: 'credits (positive) is required' }
+      description: 'credits is missing or is not an integer between 1 and 100',
+      schema: { message: 'credits must be an integer between 1 and 100' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await shopController.purchaseCredits(req, res, uri, dbName);
@@ -389,16 +389,16 @@ app.post('/api/purchase-pack', authMiddleware, async (req, res) => {
       schema: { message: 'Insufficient credits' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error. Returns { error: "No characters available" } when the card collection is empty, otherwise { error: <underlying error message> }',
-      schema: { error: 'No characters available' }
+      description: 'Server error. The body is { message: "No characters available" } when the card collection is empty, otherwise { message: "Internal server error" }',
+      schema: { message: 'No characters available' }
   }
   */
   await shopController.purchasePack(req, res, uri, dbName);
@@ -407,14 +407,13 @@ app.post('/api/purchase-pack', authMiddleware, async (req, res) => {
 // Characters
 app.get('/api/characters', authMiddleware, async (req, res) => {
   // #swagger.tags = ['Characters']
-  // #swagger.description = 'Get every card in the collection, sorted by index ascending. Each item carries _id, hpId, index, name, house and image.'
+  // #swagger.description = 'Get every card in the collection, sorted by index ascending. Each item carries hpId, index, name, house and image (no _id).'
   // #swagger.security = [{ "bearerAuth": [] }]
   /*
   #swagger.responses[200] = {
       description: 'Characters retrieved successfully',
       schema: {
           characters: [{
-              _id: '507f1f77bcf86cd799439011',
               hpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
               index: 1,
               name: 'Harry Potter',
@@ -424,12 +423,12 @@ app.get('/api/characters', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[500] = {
-      description: 'Server error',
-      schema: { error: 'Error retrieving characters' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await characterController.getCharacters(req, res, uri, dbName);
@@ -458,19 +457,19 @@ app.get('/api/characters/detail/:id', authMiddleware, async (req, res) => {
   }
   #swagger.responses[400] = {
       description: 'The id path segment is empty',
-      schema: { error: 'Character ID is required' }
+      schema: { message: 'Character ID is required' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'No card has this hpId',
       schema: { message: 'Character not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error',
-      schema: { error: 'Error retrieving character' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await characterController.getCharacterById(req, res, uri, dbName);
@@ -500,19 +499,19 @@ app.get('/api/characters/details/:id', authMiddleware, async (req, res) => {
   }
   #swagger.responses[400] = {
       description: 'The id path segment is empty',
-      schema: { error: 'Character ID is required' }
+      schema: { message: 'Character ID is required' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'No card has this hpId',
       schema: { message: 'Character not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error',
-      schema: { error: 'Error retrieving details' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await characterController.getCharacterDetails(req, res, uri, dbName);
@@ -544,6 +543,7 @@ app.post('/api/exchange/propose', authMiddleware, async (req, res) => {
           exchange: {
               _id: '507f1f77bcf86cd799439011',
               proposer: '507f1f77bcf86cd799439012',
+              proposerName: 'mario.rossi',
               offeredHpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
               offeredCardName: 'Harry Potter',
               offeredImage: 'https://hp-api.herokuapp.com/images/harry.jpg',
@@ -557,20 +557,20 @@ app.post('/api/exchange/propose', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[400] = {
-      description: 'offeredHpId or requestedHpId missing ("offeredHpId and requestedHpId are required"); the two ids are equal ("The offered and requested cards must be different"); the proposer holds 1 or 0 copies of the offered card ("You do not have enough copies of <name>"); or the proposer already owns the requested card ("You already own <name>")',
+      description: 'offeredHpId or requestedHpId missing ("offeredHpId and requestedHpId are required"); the two ids are equal ("The offered and requested cards must be different"); the proposer holds 1 or 0 copies of the offered card ("You do not have enough copies of the offered card name"); or the proposer already owns the requested card ("You already own the requested card name")',
       schema: { message: 'You do not have enough copies of Harry Potter' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'One or both hpId values are not in the collection ("One or both cards do not exist"), or the proposer user document is missing ("User not found")',
       schema: { message: 'One or both cards do not exist' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; always returns this fixed body',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await tradeController.proposeExchange(req, res, uri, dbName);
@@ -598,12 +598,12 @@ app.post('/api/exchange/accept', authMiddleware, async (req, res) => {
       schema: { message: 'Exchange completed successfully' }
   }
   #swagger.responses[400] = {
-      description: 'The proposer no longer holds a duplicate of the offered card ("The proposer no longer has a duplicate of <name>"), or the acceptor does not hold a duplicate of the requested card ("You do not have a duplicate of <name>")',
+      description: 'The proposer no longer holds a duplicate of the offered card ("The proposer no longer has a duplicate of the offered card name"), or the acceptor does not hold a duplicate of the requested card ("You do not have a duplicate of the requested card name")',
       schema: { message: 'The proposer no longer has a duplicate of Harry Potter' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'The proposer or acceptor user document is missing',
@@ -614,8 +614,8 @@ app.post('/api/exchange/accept', authMiddleware, async (req, res) => {
       schema: { message: 'Exchange not found or already accepted by another user' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; always returns this fixed body',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await tradeController.acceptExchange(req, res, uri, dbName);
@@ -645,6 +645,7 @@ app.get('/api/exchanges', authMiddleware, async (req, res) => {
           exchanges: [{
               _id: '507f1f77bcf86cd799439011',
               proposer: '507f1f77bcf86cd799439012',
+              proposerName: 'mario.rossi',
               offeredHpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
               offeredCardName: 'Harry Potter',
               offeredImage: 'https://hp-api.herokuapp.com/images/harry.jpg',
@@ -658,12 +659,12 @@ app.get('/api/exchanges', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await tradeController.getExchanges(req, res, uri, dbName);
@@ -681,6 +682,7 @@ app.get('/api/exchange/user', authMiddleware, async (req, res) => {
           exchanges: [{
               _id: '507f1f77bcf86cd799439011',
               proposer: '507f1f77bcf86cd799439012',
+              proposerName: 'mario.rossi',
               offeredHpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
               offeredCardName: 'Harry Potter',
               offeredImage: 'https://hp-api.herokuapp.com/images/harry.jpg',
@@ -694,12 +696,12 @@ app.get('/api/exchange/user', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await tradeController.getUserExchanges(req, res, uri, dbName);
@@ -717,6 +719,7 @@ app.get('/api/exchange/completed', authMiddleware, async (req, res) => {
           exchanges: [{
               _id: '507f1f77bcf86cd799439011',
               proposer: '507f1f77bcf86cd799439012',
+              proposerName: 'mario.rossi',
               offeredHpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
               offeredCardName: 'Harry Potter',
               offeredImage: 'https://hp-api.herokuapp.com/images/harry.jpg',
@@ -732,16 +735,16 @@ app.get('/api/exchange/completed', authMiddleware, async (req, res) => {
       }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; always returns this fixed body',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await tradeController.getCompletedExchanges(req, res, uri, dbName);
@@ -763,8 +766,8 @@ app.delete('/api/exchange/:exchangeId', authMiddleware, async (req, res) => {
       schema: { message: 'Exchange cancelled successfully' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[403] = {
       description: 'The caller is not the proposer of this exchange',
@@ -775,8 +778,8 @@ app.delete('/api/exchange/:exchangeId', authMiddleware, async (req, res) => {
       schema: { message: 'Exchange not found or already completed' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await tradeController.cancelExchange(req, res, uri, dbName);
@@ -809,16 +812,16 @@ app.post('/api/sell-sticker', authMiddleware, async (req, res) => {
       schema: { message: 'You cannot sell the last copy of a card' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'The user does not exist or does not own a card with this hpId',
       schema: { message: 'User or card not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error; the error field carries the underlying error message',
-      schema: { error: 'Internal server error' }
+      description: 'Server error; the body is always this fixed object',
+      schema: { message: 'Internal server error' }
   }
   */
   await extraController.sellSticker(req, res, uri, dbName);
@@ -846,16 +849,16 @@ app.post('/api/purchase-maxi-pack', authMiddleware, async (req, res) => {
       schema: { message: 'Insufficient credits' }
   }
   #swagger.responses[401] = {
-      description: 'Missing, malformed, invalid or expired token',
-      schema: { error: 'Missing token' }
+      description: 'Missing or malformed Authorization header, or invalid or expired token',
+      schema: { message: 'Missing or malformed Authorization header' }
   }
   #swagger.responses[404] = {
       description: 'User not found',
       schema: { message: 'User not found' }
   }
   #swagger.responses[500] = {
-      description: 'Server error. Returns { error: "No characters available" } when the card collection is empty, otherwise { error: <underlying error message> }',
-      schema: { error: 'No characters available' }
+      description: 'Server error. The body is { message: "No characters available" } when the card collection is empty, otherwise { message: "Internal server error" }',
+      schema: { message: 'No characters available' }
   }
   */
   await extraController.purchaseMaxiPack(req, res, uri, dbName);

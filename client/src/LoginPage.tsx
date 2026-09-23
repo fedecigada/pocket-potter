@@ -47,6 +47,33 @@ function LoginPage() {
     }
   }
 
+  async function handleDemoLogin() {
+    setError('');
+    setLoading(true);
+    const slowTimer = setTimeout(() => setSlowServer(true), 3000);
+
+    try {
+      const response = await fetch(`${baseUrl}/api/demo-login`, {
+        method: 'POST',
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || 'Could not start the demo');
+        return;
+      }
+
+      localStorage.setItem('token', data.token);
+      navigate('/');
+    } catch {
+      setError('Network error');
+    } finally {
+      clearTimeout(slowTimer);
+      setLoading(false);
+      setSlowServer(false);
+    }
+  }
+
   return (
     <div className="bg-muted flex min-h-svh items-center justify-center">
       <Card className="w-full max-w-sm">
@@ -79,6 +106,19 @@ function LoginPage() {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Signing in…' : 'Sign in'}
             </Button>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              onClick={handleDemoLogin}
+              disabled={loading}
+            >
+              {loading ? 'Loading…' : 'Try the demo'}
+            </Button>
+            <p className="text-muted-foreground text-center text-xs">
+              Or sign in with demo@pocketpotter.dev / demo1234. The demo account
+              resets every time someone starts a demo session.
+            </p>
             <p className="text-muted-foreground text-center text-sm">
               Don't have an account?{' '}
               <Link to="/register" className="underline">

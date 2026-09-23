@@ -140,7 +140,9 @@ These are understood trade-offs rather than open bugs:
 - No connection pooling: each controller opens and closes its own MongoDB connection.
 - Trade acceptance uses an atomic `findOneAndUpdate` with a `processing` lock, but the follow-up
   writes are not wrapped in a transaction.
-- The JWT has no refresh token: it expires after 7 days and the user logs in again.
+- The JWT has no refresh token and cannot be revoked: it expires after 7 days, and the middleware
+  only verifies the signature, so a token issued before an account was deleted keeps working until
+  it expires. Revoking would require a token blacklist or short-lived tokens with refresh.
 - The seed script rebuilds the card collection and clears every user's album and trades, so it is
   not safe to run against real data.
 - Two moderate DoS advisories in `qs` (transitive, via Express 4) are unpatched, because fixing
@@ -154,6 +156,8 @@ These are understood trade-offs rather than open bugs:
   picker so it stays clear which cards you are missing.
 - Trade board filters: the API already supports `?search=` and `?house=`, the frontend does not
   use them yet.
+- Account settings page: the API exposes update and delete account, but the frontend has no form
+  for either, so a user cannot change their details or delete their account from the interface.
 
 ## Credits
 

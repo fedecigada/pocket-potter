@@ -10,6 +10,7 @@ const shopController = require('./src/controllers/shopController');
 const tradeController = require('./src/controllers/tradeController');
 const characterController = require('./src/controllers/characterController');
 const extraController = require('./src/controllers/extraController');
+const demoController = require('./src/controllers/demoController');
 
 const uri = process.env.DB_URI;
 const dbName = process.env.DB_NAME;
@@ -114,6 +115,26 @@ app.post('/api/login', async (req, res) => {
   }
   */
   await userController.login(req, res, uri, dbName);
+});
+
+// Demo
+app.post('/api/demo-login', async (req, res) => {
+  // #swagger.tags = ['User']
+  // #swagger.description = 'Start a demo session. Takes no input: it resets the demo account, the fake collectors and their pending trades to a known state, then returns a token for the demo account. Any progress made by a previous visitor is discarded.'
+  /*
+  #swagger.responses[200] = {
+      description: 'Demo session ready',
+      schema: {
+          message: 'Demo session ready',
+          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+      }
+  }
+  #swagger.responses[500] = {
+      description: 'Internal server error',
+      schema: { message: 'Internal server error' }
+  }
+  */
+  await demoController.demoLogin(req, res, uri, dbName);
 });
 
 app.put('/api/account/update', authMiddleware, async (req, res) => {

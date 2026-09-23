@@ -377,6 +377,50 @@
         }
       }
     },
+    "/api/demo-login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Start a demo session. Takes no input: it resets the demo account, the fake collectors and their pending trades to a known state, then returns a token for the demo account. Any progress made by a previous visitor is discarded.",
+        "responses": {
+          "200": {
+            "description": "Demo session ready",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Demo session ready"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/account/update": {
       "put": {
         "tags": [

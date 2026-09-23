@@ -48,7 +48,7 @@ function RegisterPage() {
   }
 
   return (
-    <div className="bg-muted flex min-h-svh items-center justify-center">
+    <div className="bg-muted flex min-h-svh items-start justify-center p-4 pt-[15vh]">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="font-logo text-center text-4xl font-black tracking-wide">

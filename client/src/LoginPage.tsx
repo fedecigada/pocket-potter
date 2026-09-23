@@ -75,7 +75,7 @@ function LoginPage() {
   }
 
   return (
-    <div className="bg-muted flex min-h-svh items-center justify-center">
+    <div className="bg-muted flex min-h-svh items-start justify-center p-4 pt-[15vh]">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="font-logo text-center text-4xl font-black tracking-wide">
@@ -115,8 +115,9 @@ function LoginPage() {
               {loading ? 'Loading…' : 'Try the demo'}
             </Button>
             <p className="text-muted-foreground text-center text-xs">
-              Or sign in with demo@pocketpotter.dev / Nimbus2000! - the demo
-              account resets on every new session.
+              Or sign in with demo@pocketpotter.dev / Nimbus2000!
+              <br />
+              The demo account resets on every new session.
             </p>
             <p className="text-muted-foreground text-center text-sm">
               Don't have an account?{' '}

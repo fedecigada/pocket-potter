@@ -53,8 +53,17 @@ async function seedDemoState(db) {
     );
   }
 
-  await db.collection('exchanges').deleteMany({});
-  await db.collection('users').deleteMany({});
+  const demoUsers = await db
+    .collection('users')
+    .find({ isDemo: true })
+    .project({ _id: 1 })
+    .toArray();
+  const demoIds = demoUsers.map((user) => user._id);
+
+  await db.collection('exchanges').deleteMany({
+    $or: [{ proposer: { $in: demoIds } }, { acceptor: { $in: demoIds } }],
+  });
+  await db.collection('users').deleteMany({ isDemo: true });
 
   const hashedPassword = await bcryptjs.hash(DEMO_USER.password, saltRounds);
 
@@ -70,6 +79,7 @@ async function seedDemoState(db) {
     housePreference: DEMO_USER.housePreference,
     credits: DEMO_USER.credits,
     album: demoAlbum,
+    isDemo: true,
   });
 
   // Each fake user owns two copies of a card the demo is missing
@@ -79,6 +89,7 @@ async function seedDemoState(db) {
     ...user,
     password: hashedPassword,
     credits: 0,
+    isDemo: true,
     album: [albumEntry(missingCards[i], 2), albumEntry(cards[i], 1)],
   }));
 

@@ -103,7 +103,11 @@ function DashboardPage() {
       <div>
         {account.credits === 0 ? (
           <Button asChild>
-            <Link to="/shop">Buy credits to open your first pack</Link>
+            <Link to="/shop">
+              {account.statistics.totalCards === 0
+                ? 'Buy credits to open your first pack'
+                : 'Buy credits to open a pack'}
+            </Link>
           </Button>
         ) : account.statistics.completionPercentage < 100 ? (
           <Button asChild>

@@ -3,6 +3,23 @@ const ObjectId = require('mongodb').ObjectId;
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;
+const HOUSES = ['Gryffindor', 'Hufflepuff', 'Ravenclaw', 'Slytherin'];
+
+function validateUserFields({ username, email, password, housePreference }) {
+  for (const [field, value] of [
+    ['username', username],
+    ['email', email],
+    ['password', password],
+  ]) {
+    if (value !== undefined && typeof value !== 'string') {
+      return `${field} must be a string`;
+    }
+  }
+  if (housePreference && !HOUSES.includes(housePreference)) {
+    return `housePreference must be one of: ${HOUSES.join(', ')}`;
+  }
+  return null;
+}
 
 async function register(req, res, uri, dbName) {
   let client;
@@ -10,6 +27,10 @@ async function register(req, res, uri, dbName) {
     const { username, email, password, housePreference } = req.body;
     if (!username || !email || !password) {
       return res.status(400).json({ message: 'All fields are required' });
+    }
+    const validationError = validateUserFields(req.body);
+    if (validationError) {
+      return res.status(400).json({ message: validationError });
     }
     client = await new MongoClient(uri).connect();
     const db = client.db(dbName);
@@ -87,7 +108,10 @@ async function updateAccount(req, res, uri, dbName) {
   try {
     const userId = req.userId;
     const { username, email, housePreference, password } = req.body;
-
+    const validationError = validateUserFields(req.body);
+    if (validationError) {
+      return res.status(400).json({ message: validationError });
+    }
     const updateFields = {};
     if (username) updateFields.username = username;
     if (email) updateFields.email = email;

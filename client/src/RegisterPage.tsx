@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useNavigate, Link } from 'react-router-dom';
 import { baseUrl } from '@/lib/api';
+import ThemeToggle from '@/components/ThemeToggle';
 
 function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -48,7 +49,10 @@ function RegisterPage() {
   }
 
   return (
-    <div className="bg-muted flex min-h-svh items-start justify-center p-4 pt-[15vh]">
+    <div className="bg-muted relative flex min-h-svh items-start justify-center p-4 pt-[15vh]">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="font-logo text-center text-4xl font-black tracking-wide">
@@ -89,8 +93,9 @@ function RegisterPage() {
             {error && <p className="text-destructive text-sm">{error}</p>}
             {slowServer && (
               <p className="text-muted-foreground text-center text-sm">
-                Starting the server - free hosting puts it to sleep when unused.
-                This can take up to a minute.
+                Waking up the server, please wait.
+                <br />
+                This can take a minute.
               </p>
             )}
             <Button type="submit" className="w-full" disabled={loading}>

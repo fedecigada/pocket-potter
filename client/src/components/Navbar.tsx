@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const links = [
   { to: '/album', label: 'Album' },
@@ -38,36 +39,40 @@ export default function Navbar() {
           <Button variant="outline" onClick={handleLogout}>
             Sign out
           </Button>
+          <ThemeToggle />
         </div>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="sm:hidden"
-              aria-label="Open menu"
-            >
-              <Menu />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" aria-describedby={undefined}>
-            <SheetTitle className="sr-only">Menu</SheetTitle>
-            <div className="mt-8 flex flex-col gap-4 px-4">
-              {links.map((link) => (
-                <SheetClose asChild key={link.to}>
-                  <Link to={link.to} className="text-lg">
-                    {link.label}
-                  </Link>
+        <div className="flex items-center gap-1 sm:hidden">
+          <ThemeToggle />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="sm:hidden"
+                aria-label="Open menu"
+              >
+                <Menu />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" aria-describedby={undefined}>
+              <SheetTitle className="sr-only">Menu</SheetTitle>
+              <div className="mt-8 flex flex-col gap-4 px-4">
+                {links.map((link) => (
+                  <SheetClose asChild key={link.to}>
+                    <Link to={link.to} className="text-lg">
+                      {link.label}
+                    </Link>
+                  </SheetClose>
+                ))}
+                <SheetClose asChild>
+                  <Button variant="outline" onClick={handleLogout}>
+                    Sign out
+                  </Button>
                 </SheetClose>
-              ))}
-              <SheetClose asChild>
-                <Button variant="outline" onClick={handleLogout}>
-                  Sign out
-                </Button>
-              </SheetClose>
-            </div>
-          </SheetContent>
-        </Sheet>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </nav>
   );

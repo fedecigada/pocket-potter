@@ -23,6 +23,11 @@
       name="description"
       content="Collect Harry Potter character cards, open packs, and trade duplicates with other collectors."
     />
+    <script>
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

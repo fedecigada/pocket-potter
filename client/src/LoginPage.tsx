@@ -98,9 +98,8 @@ function LoginPage() {
             />
             {error && <p className="text-destructive text-sm">{error}</p>}
             {slowServer && (
-              <p className="text-muted-foreground text-center text-sm">
-                Starting the server - free hosting puts it to sleep when unused.
-                This can take up to a minute.
+              <p className="text-center text-sm text-amber-600 dark:text-amber-400">
+                Waking up the server — free hosting, this can take a minute.
               </p>
             )}
             <Button type="submit" className="w-full" disabled={loading}>
@@ -116,8 +115,8 @@ function LoginPage() {
               {loading ? 'Loading…' : 'Try the demo'}
             </Button>
             <p className="text-muted-foreground text-center text-xs">
-              Or sign in with demo@pocketpotter.dev / demo1234. The demo account
-              resets every time someone starts a demo session.
+              Or sign in with demo@pocketpotter.dev / Nimbus2000! - the demo
+              account resets on every new session.
             </p>
             <p className="text-muted-foreground text-center text-sm">
               Don't have an account?{' '}

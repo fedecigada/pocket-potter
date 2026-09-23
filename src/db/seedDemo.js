@@ -9,7 +9,7 @@ const DUPLICATE_CARDS = 3;
 const DEMO_USER = {
   username: 'demo',
   email: 'demo@pocketpotter.dev',
-  password: 'demo1234',
+  password: 'Nimbus2000!',
   housePreference: 'Gryffindor',
   credits: 4,
 };

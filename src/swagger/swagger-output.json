@@ -1248,7 +1248,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Pack purchased successfully; cards always has 5 entries and may contain repeats",
+            "description": "Pack purchased successfully; cards always has 5 entries and may contain repeats. isNew is true when the card was not in the album before this pack",
             "schema": {
               "type": "object",
               "properties": {
@@ -1272,6 +1272,10 @@
                       "image": {
                         "type": "string",
                         "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+                      },
+                      "isNew": {
+                        "type": "boolean",
+                        "example": true
                       }
                     }
                   }
@@ -2733,7 +2737,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Maxi pack purchased successfully; cards always has 9 entries and may contain repeats",
+            "description": "Maxi pack purchased successfully; cards always has 9 entries and may contain repeats. isNew is true when the card was not in the album before this pack",
             "schema": {
               "type": "object",
               "properties": {
@@ -2757,13 +2761,17 @@
                       "image": {
                         "type": "string",
                         "example": "https://hp-api.herokuapp.com/images/harry.jpg"
+                      },
+                      "isNew": {
+                        "type": "boolean",
+                        "example": true
                       }
                     }
                   }
                 },
                 "remainingCredits": {
                   "type": "number",
-                  "example": 3
+                  "example": 4
                 }
               },
               "xml": {

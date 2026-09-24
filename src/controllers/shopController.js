@@ -70,6 +70,7 @@ async function purchasePack(req, res, uri, dbName) {
     if (!availableCards.length) {
       return res.status(500).json({ message: 'No characters available' });
     }
+    const ownedIds = new Set(user.album.map((card) => card.hpId));
 
     // Generate a random pack from the database
     const packCards = [];
@@ -81,7 +82,9 @@ async function purchasePack(req, res, uri, dbName) {
         hpId: card.hpId,
         name: card.name,
         image: card.image,
+        isNew: !ownedIds.has(card.hpId),
       });
+      ownedIds.add(card.hpId);
     }
 
     // Updates existing cards or inserts them one at a time

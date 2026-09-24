@@ -393,13 +393,14 @@ app.post('/api/purchase-pack', authMiddleware, async (req, res) => {
   // #swagger.security = [{ "bearerAuth": [] }]
   /*
   #swagger.responses[200] = {
-      description: 'Pack purchased successfully; cards always has 5 entries and may contain repeats',
+      description: 'Pack purchased successfully; cards always has 5 entries and may contain repeats. isNew is true when the card was not in the album before this pack',
       schema: {
           message: 'Pack purchased successfully',
           cards: [{
               hpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
               name: 'Harry Potter',
-              image: 'https://hp-api.herokuapp.com/images/harry.jpg'
+              image: 'https://hp-api.herokuapp.com/images/harry.jpg',
+              isNew: true
           }],
           remainingCredits: 4
       }
@@ -853,15 +854,16 @@ app.post('/api/purchase-maxi-pack', authMiddleware, async (req, res) => {
   // #swagger.security = [{ "bearerAuth": [] }]
   /*
   #swagger.responses[200] = {
-      description: 'Maxi pack purchased successfully; cards always has 9 entries and may contain repeats',
+      description: 'Maxi pack purchased successfully; cards always has 9 entries and may contain repeats. isNew is true when the card was not in the album before this pack',
       schema: {
           message: 'Maxi pack purchased successfully',
           cards: [{
               hpId: '9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8',
               name: 'Harry Potter',
-              image: 'https://hp-api.herokuapp.com/images/harry.jpg'
+              image: 'https://hp-api.herokuapp.com/images/harry.jpg',
+              isNew: true
           }],
-          remainingCredits: 3
+          remainingCredits: 4
       }
   }
   #swagger.responses[400] = {

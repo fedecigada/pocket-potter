@@ -4,6 +4,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+const HOUSE_STYLES: Record<string, string> = {
+  Gryffindor: 'bg-red-100 text-red-900 dark:bg-red-950 dark:text-red-200',
+  Slytherin:
+    'bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-200',
+  Ravenclaw: 'bg-blue-100 text-blue-900 dark:bg-blue-950 dark:text-blue-200',
+  Hufflepuff:
+    'bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200',
+};
 
 type Account = {
   username: string;
@@ -40,52 +48,87 @@ function DashboardPage() {
     return (
       <>
         <Skeleton className="mb-6 h-8 w-64" />
-        <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <Skeleton className="mb-8 h-9 w-full sm:w-48" />
+        <div className="mb-8 grid grid-cols-3 gap-2 sm:gap-4">
           {Array.from({ length: 3 }).map((_, i) => (
             <Skeleton key={i} className="h-28 w-full rounded-xl" />
           ))}
         </div>
-        <Skeleton className="mb-8 h-3 w-full rounded-full" />
-        <Skeleton className="h-9 w-48" />
+        <Skeleton className="h-3 w-full rounded-full" />
       </>
     );
   }
 
   return (
     <>
-      <h1 className="font-decorative mb-6 text-2xl">
+      <h1 className="font-decorative mb-6 flex flex-wrap items-center gap-3 text-2xl">
         Welcome back, {account.username}
+        {account.housePreference && (
+          <span
+            className={`rounded-full px-3 py-1 font-sans text-xs font-semibold ${
+              HOUSE_STYLES[account.housePreference] ?? 'bg-muted'
+            }`}
+          >
+            {account.housePreference}
+          </span>
+        )}
       </h1>
-      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+
+      <div className="mb-8">
+        {account.credits === 0 ? (
+          <Button asChild className="w-full sm:w-auto">
+            <Link to="/shop">
+              {account.statistics.totalCards === 0
+                ? 'Buy credits to open your first pack'
+                : 'Buy credits to open a pack'}
+            </Link>
+          </Button>
+        ) : account.statistics.completionPercentage < 100 ? (
+          <Button asChild className="w-full sm:w-auto">
+            <Link to="/shop">Open a pack</Link>
+          </Button>
+        ) : (
+          <Button asChild variant="outline" className="w-full sm:w-auto">
+            <Link to="/trades">Browse trades</Link>
+          </Button>
+        )}
+      </div>
+
+      <div className="mb-8 grid grid-cols-3 gap-2 sm:gap-4">
         <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-4xl font-bold">{account.credits}</p>
-            <p className="text-muted-foreground text-sm">Credits</p>
+          <CardContent className="px-2 pt-4 pb-2 text-center sm:pt-8 sm:pb-4">
+            <p className="text-2xl font-bold sm:text-4xl">{account.credits}</p>
+            <p className="text-muted-foreground text-xs sm:text-sm">Credits</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-4xl font-bold">
+          <CardContent className="px-2 pt-4 pb-2 text-center sm:pt-8 sm:pb-4">
+            <p className="text-2xl font-bold sm:text-4xl">
               {account.statistics.uniqueCards}
-              <span className="text-muted-foreground text-xl">
+              <span className="text-muted-foreground text-base sm:text-xl">
                 /{account.statistics.totalCollectionSize}
               </span>
             </p>
-            <p className="text-muted-foreground text-sm">Cards collected</p>
+            <p className="text-muted-foreground text-xs sm:text-sm">
+              Cards collected
+            </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-4xl font-bold">
+          <CardContent className="px-2 pt-4 pb-2 text-center sm:pt-8 sm:pb-4">
+            <p className="text-2xl font-bold sm:text-4xl">
               {account.statistics.completedExchanges}
             </p>
-            <p className="text-muted-foreground text-sm">Trades completed</p>
+            <p className="text-muted-foreground text-xs sm:text-sm">
+              Trades done
+            </p>
           </CardContent>
         </Card>
       </div>
-      <div className="mb-8">
+
+      <div>
         <div className="mb-2 flex justify-between text-sm">
           <span className="font-medium">Collection progress</span>
           <span className="text-muted-foreground">
@@ -98,26 +141,6 @@ function DashboardPage() {
             style={{ width: `${account.statistics.completionPercentage}%` }}
           />
         </div>
-      </div>
-
-      <div>
-        {account.credits === 0 ? (
-          <Button asChild>
-            <Link to="/shop">
-              {account.statistics.totalCards === 0
-                ? 'Buy credits to open your first pack'
-                : 'Buy credits to open a pack'}
-            </Link>
-          </Button>
-        ) : account.statistics.completionPercentage < 100 ? (
-          <Button asChild>
-            <Link to="/shop">Open a pack</Link>
-          </Button>
-        ) : (
-          <Button asChild variant="outline">
-            <Link to="/trades">Browse trades</Link>
-          </Button>
-        )}
       </div>
     </>
   );

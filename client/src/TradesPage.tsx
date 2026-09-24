@@ -208,7 +208,7 @@ export default function TradesPage() {
 
               return (
                 <TradeRow key={trade._id} trade={trade}>
-                  <div className="flex shrink-0 items-center gap-3">
+                  <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:shrink-0 sm:justify-end">
                     {trade.proposerName && (
                       <span className="text-muted-foreground text-sm">
                         offered by {trade.proposerName}
@@ -261,30 +261,32 @@ export default function TradesPage() {
           <ul className="space-y-3">
             {myTrades.map((trade) => (
               <TradeRow key={trade._id} trade={trade}>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      Cancel
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Cancel this trade?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Your {trade.offeredCardName} will be available for
-                        trading again.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Keep it</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={() => handleCancel(trade._id)}
-                      >
-                        Yes, cancel
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+                <div className="flex w-full justify-end sm:w-auto">
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="outline" size="sm">
+                        Cancel
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Cancel this trade?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Your {trade.offeredCardName} will be available for
+                          trading again.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Keep it</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={() => handleCancel(trade._id)}
+                        >
+                          Yes, cancel
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
               </TradeRow>
             ))}
           </ul>

@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '@/lib/api';
 import { Button } from '@/components/ui/button';
+import { useRef } from 'react';
 
 export default function ShopPage() {
   const [credits, setCredits] = useState<number | null>(null);
   const [buying, setBuying] = useState(false);
-  const [lastCards, setLastCards] = useState<{ name: string; image: string }[]>(
-    [],
-  );
+  const [lastCards, setLastCards] = useState<
+    { name: string; image: string; isNew: boolean }[]
+  >([]);
+  const [packId, setPackId] = useState(0);
   const [error, setError] = useState('');
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   async function buyCredits(amount: number) {
     setBuying(true);
@@ -39,6 +42,13 @@ export default function ShopPage() {
     } else {
       setCredits(data.remainingCredits);
       setLastCards(data.cards);
+      setPackId((n) => n + 1);
+      setTimeout(() => {
+        cardsRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }, 50);
     }
     setBuying(false);
   }
@@ -91,17 +101,41 @@ export default function ShopPage() {
       </div>
       {error && <p className="text-destructive mt-4">{error}</p>}
       {lastCards.length > 0 && (
-        <div className="mt-8">
+        <div ref={cardsRef} className="mt-8">
           <h2 className="mb-4 text-lg font-semibold">You got:</h2>
-          <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
+          <div key={packId} className="grid grid-cols-3 gap-4 sm:grid-cols-5">
             {lastCards.map((card, i) => (
               <div key={card.name + i}>
-                <img
-                  src={card.image}
-                  alt={card.name}
-                  className="aspect-3/4 w-full rounded-xl object-cover"
-                />
-                <p className="mt-1 text-xs">{card.name}</p>
+                <div
+                  className="pack-card"
+                  style={
+                    { '--card-delay': `${i * 150}ms` } as React.CSSProperties
+                  }
+                >
+                  <div className="pack-card-inner">
+                    <div className="pack-card-face">
+                      <img
+                        src={card.image}
+                        alt={card.name}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="pack-card-face pack-card-back flex items-center justify-center rounded-xl bg-black">
+                      <div className="absolute inset-1 rounded-lg border border-white" />
+                      <span className="card-back-text text-3xl text-white sm:text-4xl">
+                        P<span className="inline-block translate-y-1">P</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p className="mt-1 text-xs">
+                  {card.name}
+                  {card.isNew && (
+                    <span className="ml-1 rounded bg-amber-400 px-1 text-[10px] font-bold text-amber-950">
+                      NEW
+                    </span>
+                  )}
+                </p>
               </div>
             ))}
           </div>

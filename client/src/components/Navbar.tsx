@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
 import {
@@ -32,9 +32,13 @@ export default function Navbar() {
         </Link>
         <div className="hidden items-center gap-6 sm:flex">
           {links.map((link) => (
-            <Link key={link.to} to={link.to}>
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) => (isActive ? 'font-semibold' : '')}
+            >
               {link.label}
-            </Link>
+            </NavLink>
           ))}
           <Button variant="outline" onClick={handleLogout}>
             Sign out
@@ -58,11 +62,17 @@ export default function Navbar() {
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <div className="mt-8 flex flex-col gap-4 px-4">
                 {links.map((link) => (
-                  <SheetClose asChild key={link.to}>
-                    <Link to={link.to} className="text-lg">
-                      {link.label}
-                    </Link>
-                  </SheetClose>
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    className={({ isActive }) =>
+                      `text-lg ${isActive ? 'font-semibold' : ''}`
+                    }
+                  >
+                    <SheetClose asChild>
+                      <span>{link.label}</span>
+                    </SheetClose>
+                  </NavLink>
                 ))}
                 <SheetClose asChild>
                   <Button variant="outline" onClick={handleLogout}>

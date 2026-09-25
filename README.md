@@ -8,10 +8,6 @@ the card list is fixed and the same for everyone.
 
 Live demo: https://pocket-potter.vercel.app
 
-## Screenshots
-
-<!-- TODO: screenshots -->
-
 ## Features
 
 - Register and sign in with an optional favourite house.

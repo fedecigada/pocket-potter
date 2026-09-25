@@ -16,48 +16,62 @@ export default function ShopPage() {
   async function buyCredits(amount: number) {
     setBuying(true);
     setError('');
-    const response = await apiFetch('/api/purchase-credits', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ credits: amount }),
-    });
-    const data = await response.json();
+    try {
+      const response = await apiFetch('/api/purchase-credits', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credits: amount }),
+      });
+      const data = await response.json();
 
-    if (!response.ok) {
-      setError(data.message || 'Could not buy credits');
-    } else {
-      setCredits(data.credits);
+      if (!response.ok) {
+        setError(data.message || 'Could not buy credits');
+      } else {
+        setCredits(data.credits);
+      }
+    } catch {
+      setError('Network error');
+    } finally {
+      setBuying(false);
     }
-    setBuying(false);
   }
 
   async function buyPack(endpoint: string) {
     setBuying(true);
     setError('');
-    const response = await apiFetch(endpoint, { method: 'POST' });
-    const data = await response.json();
+    try {
+      const response = await apiFetch(endpoint, { method: 'POST' });
+      const data = await response.json();
 
-    if (!response.ok) {
-      setError(data.message || 'Could not buy pack');
-    } else {
-      setCredits(data.remainingCredits);
-      setLastCards(data.cards);
-      setPackId((n) => n + 1);
-      setTimeout(() => {
-        cardsRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }, 50);
+      if (!response.ok) {
+        setError(data.message || 'Could not buy pack');
+      } else {
+        setCredits(data.remainingCredits);
+        setLastCards(data.cards);
+        setPackId((n) => n + 1);
+        setTimeout(() => {
+          cardsRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          });
+        }, 50);
+      }
+    } catch {
+      setError('Network error');
+    } finally {
+      setBuying(false);
     }
-    setBuying(false);
   }
 
   useEffect(() => {
     async function loadAccount() {
-      const response = await apiFetch('/api/account');
-      const data = await response.json();
-      setCredits(data.account.credits);
+      try {
+        const response = await apiFetch('/api/account');
+        const data = await response.json();
+        setCredits(data.account.credits);
+      } catch {
+        setError('Could not load your credits');
+      }
     }
     loadAccount();
   }, []);

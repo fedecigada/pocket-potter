@@ -25,7 +25,7 @@ export default function Navbar() {
     navigate('/login');
   }
   return (
-    <nav className="border-b">
+    <nav className="bg-background/80 sticky top-0 z-50 border-b backdrop-blur">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
         <Link to="/" className="font-logo text-4xl font-black tracking-wide">
           PocketPotter

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { baseUrl } from '@/lib/api';
 import ThemeToggle from '@/components/ThemeToggle';
 
@@ -13,6 +13,8 @@ function LoginPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [slowServer, setSlowServer] = useState(false);
+  const [searchParams] = useSearchParams();
+  const expired = searchParams.get('expired') === '1';
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -100,6 +102,11 @@ function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {expired && !error && (
+              <p className="text-center text-sm text-amber-600 dark:text-amber-400">
+                Your session expired, please sign in again.
+              </p>
+            )}
             {error && <p className="text-destructive text-sm">{error}</p>}
             {slowServer && (
               <p className="text-center text-sm text-amber-600 dark:text-amber-400">

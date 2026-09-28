@@ -8,6 +8,9 @@ the card list is fixed and the same for everyone.
 
 Live demo: https://pocket-potter.vercel.app
 
+Click "Try the demo" on the login page to enter a ready-made account, no registration needed.
+The backend runs on a free tier and sleeps when idle: the first load can take up to a minute.
+
 ## Features
 
 - Register and sign in with an optional favourite house.
@@ -20,6 +23,9 @@ Live demo: https://pocket-potter.vercel.app
 - Trade board: offer one of your duplicates for a card you are missing, accept other players'
   offers, cancel your own pending ones, and review completed trades.
 - Searchable character guide with house, species, ancestry, patronus and wand.
+- Light and dark theme, remembered across visits.
+- Responsive layout, designed for phones as well as desktop.
+- Pack opening animation, with a NEW badge on cards you did not own yet.
 
 ## Tech stack
 
@@ -106,8 +112,11 @@ npm run dev
 ## API documentation
 
 The API is documented with Swagger UI, served by the backend at
-[http://localhost:3100/api-docs](http://localhost:3100/api-docs). The spec is generated from the
-annotations in `app.js`; regenerate `src/swagger/swagger-output.json` after changing a route with:
+[http://localhost:3100/api-docs](http://localhost:3100/api-docs). The deployed backend serves the
+same documentation at [https://pocket-potter.onrender.com/api-docs](https://pocket-potter.onrender.com/api-docs).
+
+The spec is generated from the annotations in `app.js`; regenerate `src/swagger/swagger-output.json`
+after changing a route with:
 
 ```bash
 node src/swagger/swagger_gen.js
@@ -127,7 +136,7 @@ can take up to a minute while it wakes up.
 
 ## Status
 
-A personal portfolio project, feature-complete and actively developed. Not a product.
+A personal portfolio project, feature-complete. Not a product.
 
 ## Known limitations
 
@@ -143,10 +152,11 @@ These are understood trade-offs rather than open bugs:
   not safe to run against real data.
 - Two moderate DoS advisories in `qs` (transitive, via Express 4) are unpatched, because fixing
   them requires upgrading to Express 5.
+- The demo account is shared and rebuilt on every entry: two visitors at the same time reset each
+  other's progress.
 
 ## Possible improvements
 
-- Dark theme: the CSS variables exist, but nothing toggles the `dark` class on `<html>`.
 - Trade proposals are asymmetric: accepting a trade for a card you already own is allowed behind a
   confirmation dialog, but proposing one is blocked. Lifting the block would mean reworking the card
   picker so it stays clear which cards you are missing.
@@ -164,3 +174,6 @@ Built by Federico Cigada ([fedecigada](https://github.com/fedecigada)).
   `client/src/assets/fonts/Cinzel/OFL.txt`.
 - Harry P by GemFonts / Typotheticals, distributed as freeware on
   [DaFont](https://www.dafont.com/harry-p.font). No license file ships with the download.
+- Character images are served as provided by the HP-API; some are low resolution.
+- Harry Potter is a trademark of Warner Bros. This is a non-commercial fan project, not affiliated
+  with or endorsed by Warner Bros.

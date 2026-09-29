@@ -5,6 +5,7 @@ virtual credits, spend them on card packs, and fill an album of character cards.
 sold back for credits or put up on a peer-to-peer trade board, where another collector can accept a
 one-for-one swap. Character data comes from the public HP-API and is snapshotted into MongoDB, so
 the card list is fixed and the same for everyone.
+It is a personal portfolio project, complete and no longer in active development.
 
 Live demo: https://pocket-potter.vercel.app
 
@@ -133,10 +134,6 @@ node src/swagger/swagger_gen.js
 
 The free Render instance sleeps after a period of inactivity, so the first request after a pause
 can take up to a minute while it wakes up.
-
-## Status
-
-A personal portfolio project, feature-complete. Not a product.
 
 ## Known limitations
 
